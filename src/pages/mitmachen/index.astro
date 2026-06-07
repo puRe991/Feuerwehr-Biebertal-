@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import ContactForm from '@/components/ContactForm.astro';
+const faqs = ['Wer kann mitmachen? Menschen ab 17 Jahren mit Wohnort oder Arbeitsbezug in Biebertal.', 'Was muss ich können? Kein Vorwissen. Ausbildung, Technik und Abläufe lernst du Schritt für Schritt.', 'Wie oft sind Übungen? Regelmäßig nach Dienstplan. Konkrete Zeiten ergänzt der jeweilige Schutzbereich.', 'Muss ich sportlich sein? Grundfitness hilft. Wichtiger sind Verlässlichkeit, Lernbereitschaft und Teamgeist.', 'Kostet das etwas? Persönliche Schutzausrüstung und Ausbildung werden gestellt.'];
+---
+<BaseLayout title="Mitmachen" description="Mitmachen bei der Feuerwehr Biebertal: Informationen für Quereinsteigerinnen, Quereinsteiger und neue Einsatzkräfte.">
+<section class="bg-brand-navy px-4 py-20 text-white"><div class="mx-auto max-w-5xl"><h1 class="text-5xl font-black">Mitmachen bei der Feuerwehr Biebertal</h1><p class="mt-6 text-xl leading-9 text-slate-100">Du brauchst kein Vorwissen. Nur Interesse, Teamgeist und die Bereitschaft zu helfen. Den Rest lernst du bei uns.</p></div></section>
+<section class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_.9fr] lg:px-8"><div class="prose-page"><SectionHeader title="Warum Feuerwehr?" text="Weil Hilfe vor Ort Menschen braucht, die Verantwortung übernehmen." /><h2>So läuft der Einstieg</h2><ul><li>Kontakt aufnehmen und unverbindlich informieren.</li><li>Übungsdienst im passenden Schutzbereich kennenlernen.</li><li>Grundausbildung starten und Schritt für Schritt mitwachsen.</li><li>Nach Qualifikation an Einsätzen teilnehmen.</li></ul><h2>Was du lernst</h2><p>Brandbekämpfung, technische Hilfeleistung, Erste Hilfe, Funk, Teamarbeit, Gerätekunde und sicheres Arbeiten im Einsatz.</p><h2>FAQ</h2>{faqs.map((faq) => <p class="rounded-2xl bg-white p-4 shadow-sm"><strong>{faq.split('?')[0]}?</strong>{faq.substring(faq.indexOf('?') + 1)}</p>)}</div><ContactForm /></section>
+</BaseLayout>
