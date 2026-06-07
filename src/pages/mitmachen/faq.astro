@@ -1,7 +1,23 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ContactForm from '@/components/ContactForm.astro';
+const questions = [
+  { question: 'Kann ich ohne Erfahrung mitmachen?', answer: 'Ja. Die Ausbildung beginnt bei den Grundlagen. Du lernst alles Schritt für Schritt.' },
+  { question: 'Wie alt muss ich sein?', answer: 'Für die Einsatzabteilung ist der Einstieg ab 17 Jahren möglich. Kinderfeuerwehr und Jugendfeuerwehr haben eigene Altersgruppen.' },
+  { question: 'Was ist, wenn Beruf oder Familie viel Zeit brauchen?', answer: 'Sprich das offen an. Feuerwehr ist verbindlich, muss aber zum Leben passen. Gemeinsam klären wir, was realistisch ist.' },
+  { question: 'Welche Aufgaben gibt es außer Einsätzen?', answer: 'Ausbildung, Technik, Jugendarbeit, Organisation, Öffentlichkeitsarbeit, Betreuung und Vereinsarbeit.' },
+  { question: 'Wie lerne ich die Feuerwehr kennen?', answer: 'Melde dich über die Kontaktseite. Wir nennen dir einen passenden Übungsdienst und eine Ansprechperson.' }
+];
 ---
-<BaseLayout title="Faq" description="Informationen zu faq bei der Feuerwehr Biebertal.">
-<section class="mx-auto max-w-5xl px-4 py-16 prose-page"><h1 class="text-4xl font-black text-brand-navy">Faq</h1><p>Diese Seite ist als pflegbarer Inhaltsbereich vorbereitet. Reale Ansprechpartner, Dienstzeiten und Detailinformationen werden vor Veröffentlichung ergänzt.</p><h2>Wichtig für den Einstieg</h2><ul><li>Keine Vorkenntnisse erforderlich.</li><li>Ausbildung erfolgt strukturiert in der Feuerwehr.</li><li>Fragen können jederzeit über das Kontaktformular gestellt werden.</li></ul><ContactForm /></section>
+<BaseLayout title="FAQ Mitmachen" description="Häufige Fragen zum Mitmachen bei der Feuerwehr Biebertal.">
+  <section class="mx-auto max-w-5xl px-4 py-16 prose-page">
+    <h1 class="text-4xl font-black text-brand-navy">Häufige Fragen zum Mitmachen</h1>
+    <p>Viele Menschen überlegen lange, bevor sie zur Feuerwehr kommen. Das ist normal. Hier beantworten wir die wichtigsten Fragen kurz und ehrlich.</p>
+    <div class="grid gap-4">
+      {questions.map((item) => <article class="rounded-2xl bg-white p-5 shadow-sm"><h2 class="text-xl font-black text-brand-navy">{item.question}</h2><p>{item.answer}</p></article>)}
+    </div>
+    <h2>Noch unsicher?</h2>
+    <p>Dann melde dich unverbindlich. Eine Frage kostet nichts – und ein Übungsbesuch verpflichtet zu nichts.</p>
+    <ContactForm />
+  </section>
 </BaseLayout>

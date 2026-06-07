@@ -4,5 +4,22 @@ import ContactForm from '@/components/ContactForm.astro';
 import { ansprechpartner } from '@/data/ansprechpartner';
 ---
 <BaseLayout title="Kontakt" description="Kontakt zur Feuerwehr Biebertal. Im Notfall immer 112 wählen.">
-<section class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[.9fr_1fr] lg:px-8"><div><h1 class="text-4xl font-black text-brand-navy">Kontakt</h1><p class="mt-4 text-lg text-slate-600">Im Notfall immer 112 wählen. Für allgemeine Fragen nutzt du das Kontaktformular oder die angegebene E-Mail-Adresse.</p><div class="mt-8 space-y-4">{ansprechpartner.map((a) => <div class="rounded-2xl bg-white p-5 shadow-sm"><h2 class="font-black text-brand-navy">{a.bereich}</h2><p>{a.funktion}</p><p class="text-slate-600">{a.name} · {a.kontakt}</p></div>)}</div><h2 class="mt-8 text-2xl font-black text-brand-navy">Externe Kanäle</h2><p class="mt-2 text-slate-600">Instagram, Facebook und WhatsApp-Kanal werden als normale externe Links vorbereitet. Es werden keine externen Feeds automatisch geladen.</p></div><ContactForm /></section>
+  <section class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[.9fr_1fr] lg:px-8">
+    <div>
+      <h1 class="text-4xl font-black text-brand-navy">Kontakt</h1>
+      <p class="mt-4 text-lg leading-8 text-slate-600">Bei Feuer, Unfall oder akuter Gefahr wählen Sie immer 112. Für Fragen zum Mitmachen, zur Jugendfeuerwehr, Kinderfeuerwehr oder zu allgemeinen Themen können Sie die aufgeführten Kontaktwege nutzen.</p>
+      <div class="mt-8 space-y-4">
+        {ansprechpartner.map((a) => (
+          <div class="rounded-2xl bg-white p-5 shadow-sm">
+            <h2 class="font-black text-brand-navy">{a.bereich}</h2>
+            <p>{a.funktion}</p>
+            <p class="text-slate-600">{a.name} · {a.kontakt}</p>
+          </div>
+        ))}
+      </div>
+      <h2 class="mt-8 text-2xl font-black text-brand-navy">Externe Kanäle</h2>
+      <p class="mt-2 text-slate-600">Social-Media- und Messenger-Kanäle werden nur als normale Links eingebunden. Externe Feeds laden wir nicht automatisch.</p>
+    </div>
+    <ContactForm />
+  </section>
 </BaseLayout>

@@ -9,10 +9,60 @@ import NewsCard from '@/components/NewsCard.astro';
 import { schutzbereiche } from '@/data/schutzbereiche';
 import { news } from '@/data/news';
 ---
-<BaseLayout title="Startseite" description="Feuerwehr Biebertal: ehrenamtlich, einsatzbereit und für die Gemeinde aktiv. Informationen, Mitmachen, Jugendfeuerwehr und Technik.">
-  <HeroSection title="Feuerwehr Biebertal" subtitle="Ehrenamtlich. Einsatzbereit. Für unsere Gemeinde." />
-  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"><StatsBlock /></section>
-  <section class="bg-white py-16"><div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><SectionHeader eyebrow="Über uns" title="Drei Schutzbereiche, ein Auftrag" text="Die Feuerwehr Biebertal arbeitet vollständig ehrenamtlich und deckt die Gemeinde mit den Schutzbereichen Mitte, Nord und West ab." /><div class="grid gap-6 md:grid-cols-3">{schutzbereiche.map((item) => <SchutzbereichCard item={item} />)}</div></div></section>
-  <section class="mx-auto grid max-w-7xl gap-6 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8"><InfoCard title="Mitmachen" text="Du brauchst kein Vorwissen. Nur Interesse, Teamgeist und die Bereitschaft zu helfen. Den Rest lernst du bei uns." href="/mitmachen/" /><InfoCard title="Kinder- und Jugendfeuerwehr" text="Altersgerechte Feuerwehrtechnik, Gemeinschaft und Verantwortung für Kinder von 6 bis 10 und Jugendliche von 10 bis 17 Jahren." href="/mitmachen/jugendfeuerwehr/" /><InfoCard title="Technik & Drohne" text="Fahrzeuge, Spezialausstattung und Drohnentechnik unterstützen die Einsatzkräfte bei Erkundung, Suche und Lagebildern." href="/technik/fahrzeuge/" /></section>
-  <section class="bg-brand-mist py-16"><div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><SectionHeader eyebrow="Aktuell" title="Meldungen nach Freigabe" text="Keine Live-Informationen, keine sensiblen Details, keine personenbezogenen Daten." /><div class="grid gap-6 md:grid-cols-3">{news.map((item) => <NewsCard item={item} />)}</div></div></section>
+<BaseLayout title="Startseite" description="Feuerwehr Biebertal: freiwillig, gut ausgebildet und nah an den Menschen. Informationen zum Mitmachen, zur Jugendfeuerwehr, Kinderfeuerwehr und Bürgerinfo.">
+  <HeroSection
+    title="Feuerwehr Biebertal"
+    subtitle="Wir helfen, wenn es ernst wird. Freiwillig, gut ausgebildet und mitten aus Biebertal. Mach mit – auch ohne Vorerfahrung."
+  />
+
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <StatsBlock />
+  </section>
+
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="Über uns"
+        title="Drei Schutzbereiche. Eine Feuerwehr."
+        text="Mitte, Nord und West arbeiten als freiwillige Feuerwehr eng zusammen. So bleibt Hilfe in allen Ortsteilen schnell, verlässlich und persönlich."
+      />
+      <div class="grid gap-6 md:grid-cols-3">
+        {schutzbereiche.map((item) => <SchutzbereichCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-7xl gap-6 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+    <InfoCard
+      title="Mitmachen"
+      text="Feuerwehr ist Teamarbeit. Du bringst Zeit, Verlässlichkeit und Lust zu helfen mit. Ausbildung, Ausrüstung und Praxis bekommst du bei uns."
+      href="/mitmachen/"
+      label="So steigst du ein"
+    />
+    <InfoCard
+      title="Kinder- und Jugendfeuerwehr"
+      text="Kinder und Jugendliche erleben Feuerwehr altersgerecht: Technik anfassen, Verantwortung lernen, Freundschaften knüpfen und gemeinsam wachsen."
+      href="/mitmachen/jugendfeuerwehr/"
+      label="Angebote ansehen"
+    />
+    <InfoCard
+      title="Bürgerinfo"
+      text="Was tun bei Notruf, Brand, Unwetter oder Waldbrandgefahr? Unsere Hinweise erklären die wichtigsten Schritte kurz und verständlich."
+      href="/buergerinfo/notruf-112/"
+      label="Richtig handeln"
+    />
+  </section>
+
+  <section class="bg-brand-mist py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="Aktuell"
+        title="Informationen nach Freigabe"
+        text="Wir informieren sorgfältig: keine Live-Einsatzmeldungen, keine Namen, keine Kennzeichen und keine Details, die Betroffene oder Einsatzkräfte gefährden."
+      />
+      <div class="grid gap-6 md:grid-cols-3">
+        {news.map((item) => <NewsCard item={item} />)}
+      </div>
+    </div>
+  </section>
 </BaseLayout>

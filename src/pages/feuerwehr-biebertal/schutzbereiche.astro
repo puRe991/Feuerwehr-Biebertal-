@@ -2,6 +2,30 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { schutzbereiche } from '@/data/schutzbereiche';
 ---
-<BaseLayout title="Schutzbereiche" description="Schutzbereiche Mitte, Nord und West der Feuerwehr Biebertal mit Ortsteilen, Fahrzeugen und Kontakt.">
-<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"><h1 class="text-4xl font-black text-brand-navy">Schutzbereiche</h1><div class="mt-8 grid gap-6">{schutzbereiche.map((s) => <article id={s.slug} class="rounded-3xl bg-white p-6 shadow-soft"><h2 class="text-3xl font-black text-brand-navy">{s.name}</h2><p class="mt-3 text-slate-600">{s.beschreibung}</p><dl class="mt-5 grid gap-4 md:grid-cols-2"><div><dt class="font-bold">Ortsteile</dt><dd>{s.ortsteile.join(', ')}</dd></div><div><dt class="font-bold">Feuerwehrhaus</dt><dd>{s.feuerwehrhaus}</dd></div><div><dt class="font-bold">Ansprechpartner</dt><dd>{s.ansprechpartner}</dd></div><div><dt class="font-bold">Übungszeiten</dt><dd>{s.uebungszeiten}</dd></div><div><dt class="font-bold">Fahrzeuge</dt><dd>{s.fahrzeuge.join(', ')}</dd></div></dl><a class="mt-5 inline-flex rounded-full bg-brand-red px-5 py-3 font-black text-white" href="/kontakt/">Kontakt aufnehmen</a></article>)}</div></section>
+<BaseLayout title="Schutzbereiche" description="Schutzbereiche Mitte, Nord und West der Feuerwehr Biebertal: Ortsteile, Aufgaben, Fahrzeuge und Einstieg vor Ort.">
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="max-w-4xl">
+      <p class="font-extrabold uppercase tracking-[.2em] text-brand-red">Feuerwehr vor Ort</p>
+      <h1 class="mt-3 text-4xl font-black text-brand-navy">Schutzbereiche in Biebertal</h1>
+      <p class="mt-4 text-lg leading-8 text-slate-600">Biebertal ist in die Schutzbereiche Mitte, Nord und West aufgeteilt. Das sorgt für kurze Wege, gute Ortskenntnis und klare Zuständigkeiten. Im Einsatz arbeiten alle Bereiche zusammen.</p>
+    </div>
+
+    <div class="mt-8 grid gap-6">
+      {schutzbereiche.map((s) => (
+        <article id={s.slug} class="rounded-3xl bg-white p-6 shadow-soft">
+          <h2 class="text-3xl font-black text-brand-navy">Schutzbereich {s.name}</h2>
+          <p class="mt-3 max-w-4xl text-slate-600">{s.beschreibung}</p>
+          <dl class="mt-5 grid gap-4 md:grid-cols-2">
+            <div><dt class="font-bold text-brand-navy">Ortsteile</dt><dd>{s.ortsteile.join(', ')}</dd></div>
+            <div><dt class="font-bold text-brand-navy">Feuerwehrhaus</dt><dd>{s.feuerwehrhaus}</dd></div>
+            <div><dt class="font-bold text-brand-navy">Ansprechperson</dt><dd>{s.ansprechpartner}</dd></div>
+            <div><dt class="font-bold text-brand-navy">Übungszeiten</dt><dd>{s.uebungszeiten}</dd></div>
+            <div><dt class="font-bold text-brand-navy">Fahrzeuge</dt><dd>{s.fahrzeuge.join(', ')}</dd></div>
+          </dl>
+          <p class="mt-5 text-slate-600">Du möchtest in diesem Bereich mitmachen oder eine Übung kennenlernen? Schreib uns kurz, aus welchem Ortsteil du kommst.</p>
+          <a class="mt-5 inline-flex rounded-full bg-brand-red px-5 py-3 font-black text-white" href="/kontakt/">Kontakt aufnehmen</a>
+        </article>
+      ))}
+    </div>
+  </section>
 </BaseLayout>

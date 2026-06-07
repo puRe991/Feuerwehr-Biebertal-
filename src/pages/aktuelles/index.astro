@@ -6,5 +6,12 @@ import { news } from '@/data/news';
 import { einsatzberichte } from '@/data/einsatzberichte';
 ---
 <BaseLayout title="Aktuelles" description="Aktuelle Meldungen, Veranstaltungen, Pressehinweise und freigegebene Einsatzberichte der Feuerwehr Biebertal.">
-<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"><h1 class="text-4xl font-black text-brand-navy">Aktuelles</h1><p class="mt-4 max-w-3xl text-slate-600">Meldungen werden redaktionell gepflegt. Einsatzberichte erscheinen nicht live, sondern nur nach Freigabe.</p><h2 class="mt-10 text-2xl font-black text-brand-navy">Meldungen</h2><div class="mt-6 grid gap-6 md:grid-cols-3">{news.map((item) => <NewsCard item={item} />)}</div><h2 class="mt-12 text-2xl font-black text-brand-navy">Einsatzberichte</h2><div class="mt-6 grid gap-6 md:grid-cols-2">{einsatzberichte.map((item) => <EinsatzberichtCard item={item} />)}</div></section>
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <h1 class="text-4xl font-black text-brand-navy">Aktuelles</h1>
+    <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">Hier finden Sie Meldungen der Feuerwehr Biebertal. Einsatzberichte erscheinen nicht live, sondern erst nach Prüfung und ohne sensible Details.</p>
+    <h2 class="mt-10 text-2xl font-black text-brand-navy">Meldungen</h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-3">{news.map((item) => <NewsCard item={item} />)}</div>
+    <h2 class="mt-12 text-2xl font-black text-brand-navy">Einsatzberichte</h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">{einsatzberichte.map((item) => <EinsatzberichtCard item={item} />)}</div>
+  </section>
 </BaseLayout>
