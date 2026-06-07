@@ -1,0 +1,24 @@
+---
+import MobileNavigation from './MobileNavigation.astro';
+const nav = [
+  { href: '/aktuelles/', label: 'Aktuelles' },
+  { href: '/mitmachen/', label: 'Mitmachen' },
+  { href: '/feuerwehr-biebertal/ueber-uns/', label: 'Feuerwehr' },
+  { href: '/technik/fahrzeuge/', label: 'Technik' },
+  { href: '/buergerinfo/notruf-112/', label: 'Bürgerinfo' },
+  { href: '/kontakt/', label: 'Kontakt' }
+];
+---
+<header class="sticky top-0 z-40 border-b border-white/10 bg-[#071a33] text-white shadow-lg shadow-brand-navy/20 backdrop-blur-xl">
+  <div class="container-page flex items-center justify-between py-3">
+    <a href="/" class="group flex items-center gap-3 font-black tracking-tight" aria-label="Zur Startseite der Feuerwehr Biebertal">
+      <span class="grid size-12 place-items-center rounded-2xl bg-brand-red shadow-lg shadow-red-950/30 transition group-hover:rotate-[-3deg]">112</span>
+      <span class="leading-tight">Feuerwehr<br /><span class="text-brand-gold">Biebertal</span></span>
+    </a>
+    <nav aria-label="Hauptnavigation" class="hidden items-center gap-1 rounded-full border border-white/10 bg-white/10 p-1 lg:flex">
+      {nav.map((item) => <a class="rounded-full px-4 py-2 text-sm font-bold text-white transition hover:bg-white/15 hover:text-brand-gold" href={item.href}>{item.label}</a>)}
+    </nav>
+    <a href="/mitmachen/" class="hidden rounded-full bg-white px-4 py-2 text-sm font-black text-brand-navy transition hover:bg-brand-gold xl:inline-flex">Mitmachen</a>
+    <MobileNavigation nav={nav} />
+  </div>
+</header>

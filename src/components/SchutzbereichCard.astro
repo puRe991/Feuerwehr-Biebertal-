@@ -1,0 +1,18 @@
+---
+import type { Schutzbereich } from '@/data/schutzbereiche';
+interface Props { item: Schutzbereich; }
+const { item } = Astro.props;
+---
+<article class="card-interactive group flex h-full flex-col overflow-hidden">
+  <div class="h-2 bg-brand-red"></div>
+  <div class="p-6 sm:p-7">
+    <p class="text-xs font-extrabold uppercase tracking-[.22em] text-brand-red">Schutzbereich</p>
+    <h3 class="mt-2 text-3xl font-black tracking-tight text-brand-navy">{item.name}</h3>
+    <p class="mt-4 leading-7 text-slate-600">{item.beschreibung}</p>
+    <dl class="mt-6 space-y-4 text-sm">
+      <div><dt class="font-black text-brand-navy">Ortsteile</dt><dd class="mt-1 text-slate-600">{item.ortsteile.join(', ')}</dd></div>
+      <div><dt class="font-black text-brand-navy">Fahrzeuge</dt><dd class="mt-1 text-slate-600">{item.fahrzeuge.join(', ')}</dd></div>
+    </dl>
+    <a href={`/feuerwehr-biebertal/schutzbereiche/#${item.slug}`} class="mt-7 inline-flex font-extrabold text-brand-red underline-offset-4 hover:underline">Details und Kontakt →</a>
+  </div>
+</article>

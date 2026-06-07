@@ -1,0 +1,100 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import StatsBlock from '@/components/StatsBlock.astro';
+import SchutzbereichCard from '@/components/SchutzbereichCard.astro';
+import InfoCard from '@/components/InfoCard.astro';
+import NewsCard from '@/components/NewsCard.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import { schutzbereiche } from '@/data/schutzbereiche';
+import { news } from '@/data/news';
+---
+<BaseLayout title="Startseite" description="Feuerwehr Biebertal: ehrenamtlich, einsatzbereit und für die Gemeinde aktiv. Informationen, Mitmachen, Jugendfeuerwehr und Technik.">
+  <HeroSection title="Feuerwehr Biebertal" subtitle="Ehrenamtlich. Einsatzbereit. Für unsere Gemeinde." />
+
+  <section class="container-page -mt-10 relative z-10 pb-12">
+    <StatsBlock />
+  </section>
+
+  <section class="section-shell bg-white">
+    <div class="container-page">
+      <SectionHeader eyebrow="Organisation" title="Drei Schutzbereiche, ein gemeinsamer Auftrag" text="Die Feuerwehr Biebertal ist lokal verankert und gemeindeweit vernetzt: Mitte, Nord und West arbeiten mit gemeinsamen Standards, kurzen Wegen und ehrenamtlicher Verlässlichkeit." />
+      <div class="grid gap-6 md:grid-cols-3">
+        {schutzbereiche.map((item) => <SchutzbereichCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell relative overflow-hidden bg-brand-navy text-white">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(215,25,32,.28),transparent_22rem),linear-gradient(135deg,#071a33,#0d2b52)]"></div>
+    <div class="container-page relative grid gap-10 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
+      <div class="red-rule before:bg-brand-red">
+        <p class="text-sm font-black uppercase tracking-[.24em] text-brand-gold">Mitmachen</p>
+        <h2 class="mt-3 text-4xl font-black tracking-[-0.04em] sm:text-5xl">Dein Einstieg beginnt ohne Vorwissen.</h2>
+        <p class="mt-5 text-lg leading-8 text-slate-200">Interesse, Teamgeist und Verlässlichkeit zählen. Ausbildung, Technik und Einsatzabläufe lernst du strukturiert bei uns.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <CTAButton href="/mitmachen/">Jetzt informieren</CTAButton>
+          <CTAButton href="/mitmachen/quereinsteiger/" variant="ghost">Quereinstieg</CTAButton>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <InfoCard accent="Einsatzabteilung" title="Aktiv helfen" text="Für Menschen, die Verantwortung übernehmen und im Team lernen möchten." href="/mitmachen/einsatzabteilung/" />
+        <InfoCard accent="Jugend" title="10 bis 17 Jahre" text="Technik, Gemeinschaft, Übungen und ein begleiteter Weg in die Einsatzabteilung." href="/mitmachen/jugendfeuerwehr/" />
+        <InfoCard accent="Kinder" title="6 bis 10 Jahre" text="Spielerischer Einstieg in Sicherheit, Teamarbeit und Feuerwehrthemen." href="/mitmachen/kinderfeuerwehr/" />
+        <InfoCard accent="FAQ" title="Ehrliche Antworten" text="Was du können musst, wie oft Übungen sind und wie der Einstieg läuft." href="/mitmachen/faq/" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell bg-brand-mist">
+    <div class="container-page">
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="lg:col-span-1">
+          <SectionHeader align="left" eyebrow="Bürgerinfo" title="Schnell wissen, was zu tun ist" text="Kurze, klare Hinweise für Notruf, Brandfall, Unwetter, Rauchmelder und Prävention." />
+          <CTAButton href="/buergerinfo/notruf-112/" variant="secondary">Bürgerinfo öffnen</CTAButton>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2 lg:col-span-2">
+          <InfoCard accent="Notruf" title="112 richtig absetzen" text="Wer meldet? Was ist passiert? Wo ist es passiert? Wie viele Betroffene? Warten auf Rückfragen." href="/buergerinfo/notruf-112/" />
+          <InfoCard accent="Prävention" title="Rauchmelder & Brandfall" text="Vorbereitet sein, früh warnen und im Ernstfall sicher reagieren." href="/buergerinfo/rauchmelder/" />
+          <InfoCard accent="Verkehr" title="Rettungsgasse" text="Rettungswege entscheiden über Minuten. So halten Bürgerinnen und Bürger Zufahrten frei." href="/buergerinfo/rettungsgasse/" />
+          <InfoCard accent="Wetter" title="Unwetter & Waldbrand" text="Warnungen beachten, Risiken reduzieren und Behördeninformationen ernst nehmen." href="/buergerinfo/unwetter/" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell bg-white">
+    <div class="container-page grid gap-10 lg:grid-cols-[1fr_.9fr] lg:items-center">
+      <div class="rounded-[2rem] bg-[linear-gradient(145deg,#0d2b52,#071a33_60%,#d71920_140%)] p-8 text-white shadow-2xl shadow-brand-navy/20">
+        <p class="text-sm font-black uppercase tracking-[.24em] text-brand-gold">Technik & Drohne</p>
+        <h2 class="mt-3 text-4xl font-black tracking-[-0.04em]">Ausrüstung verständlich zeigen.</h2>
+        <p class="mt-5 leading-8 text-slate-200">Fahrzeuge, Drohnentechnik und Spezialkomponenten werden als pflegbare Karten und Detailseiten präsentiert. Reale Bilder und Daten können später ersetzt werden.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <CTAButton href="/technik/fahrzeuge/">Fahrzeuge</CTAButton>
+          <CTAButton href="/technik/drohne/" variant="ghost">Drohne</CTAButton>
+        </div>
+      </div>
+      <div class="grid gap-5">
+        <InfoCard accent="Fahrzeuge" title="16 Fahrzeuge als Datenbank" text="Mit Funkrufname, Standort, Fahrzeugtyp, Einsatzzweck, Besatzung und Detailseite." href="/technik/fahrzeuge/" />
+        <InfoCard accent="Drohne" title="Lagebilder aus der Luft" text="Lageerkundung, Wärmebild, Personensuche und Datenschutz-Hinweis in einer eigenen Unterseite." href="/technik/drohne/" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell bg-slate-950 text-white">
+    <div class="container-page">
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div class="red-rule before:bg-brand-red">
+          <p class="text-sm font-black uppercase tracking-[.24em] text-brand-gold">Aktuell</p>
+          <h2 class="mt-3 text-4xl font-black tracking-[-0.04em] sm:text-5xl">Meldungen nach Freigabe</h2>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">Keine Live-Informationen, keine sensiblen Details, keine personenbezogenen Daten.</p>
+        </div>
+        <CTAButton href="/aktuelles/" variant="light">Alle Meldungen</CTAButton>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {news.map((item) => <NewsCard item={item} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

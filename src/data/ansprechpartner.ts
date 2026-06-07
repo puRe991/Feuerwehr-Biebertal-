@@ -1,0 +1,6 @@
+export type Ansprechpartner = { bereich: string; name: string; funktion: string; kontakt: string; };
+export const ansprechpartner: Ansprechpartner[] = [
+  { bereich: 'Allgemein', name: 'Wird ergänzt', funktion: 'Gemeindebrandinspektion', kontakt: 'kontakt@feuerwehr-biebertal.de' },
+  { bereich: 'Mitmachen', name: 'Wird ergänzt', funktion: 'Ansprechperson Mitgliedergewinnung', kontakt: 'kontakt@feuerwehr-biebertal.de' },
+  { bereich: 'Jugendfeuerwehr', name: 'Wird ergänzt', funktion: 'Jugendfeuerwehrwartung', kontakt: 'jugend@feuerwehr-biebertal.de' }
+];
