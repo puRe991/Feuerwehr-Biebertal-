@@ -1,9 +1,51 @@
-<form class="grid gap-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-soft" aria-describedby="form-hinweis">
-  <p id="form-hinweis" class="text-sm text-slate-600">Frontend-Formular als Vorlage. Vor Produktivbetrieb muss eine datensparsame Server-Verarbeitung mit Spam-Schutz ergänzt werden.</p>
-  <label class="grid gap-2 font-bold text-brand-navy">Name <input required name="name" autocomplete="name" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" /></label>
-  <label class="grid gap-2 font-bold text-brand-navy">E-Mail <input required type="email" name="email" autocomplete="email" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" /></label>
-  <label class="grid gap-2 font-bold text-brand-navy">Thema <select name="topic" class="rounded-xl border border-slate-300 px-4 py-3 font-normal"><option>Mitmachen</option><option>Jugendfeuerwehr</option><option>Kinderfeuerwehr</option><option>Allgemeine Anfrage</option></select></label>
-  <label class="grid gap-2 font-bold text-brand-navy">Nachricht <textarea required name="message" rows="6" class="rounded-xl border border-slate-300 px-4 py-3 font-normal"></textarea></label>
-  <label class="flex gap-3 text-sm text-slate-700"><input required type="checkbox" class="mt-1 size-4" /> Ich habe den Datenschutzhinweis gelesen und möchte kontaktiert werden.</label>
-  <button type="submit" class="rounded-full bg-brand-red px-6 py-3 font-black text-white transition hover:bg-red-700">Anfrage vorbereiten</button>
-</form>
+<section
+  class="grid gap-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-soft"
+  aria-describedby="form-hinweis"
+  aria-labelledby="contact-form-heading"
+>
+  <div class="grid gap-2">
+    <h2 id="contact-form-heading" class="text-xl font-black text-brand-navy">Kontaktanfrage</h2>
+    <p id="form-hinweis" class="text-sm text-slate-600">
+      Dieses Formular ist eine nicht absendbare Vorlage. Vor dem Produktivbetrieb muss eine datensparsame Server-Verarbeitung per POST mit Spam-Schutz ergänzt werden.
+    </p>
+  </div>
+
+  <div role="form" aria-describedby="form-hinweis form-status" class="grid gap-5">
+    <label class="grid gap-2 font-bold text-brand-navy">
+      Name
+      <input required autocomplete="name" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" />
+    </label>
+    <label class="grid gap-2 font-bold text-brand-navy">
+      E-Mail
+      <input required type="email" autocomplete="email" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" />
+    </label>
+    <label class="grid gap-2 font-bold text-brand-navy">
+      Thema
+      <select class="rounded-xl border border-slate-300 px-4 py-3 font-normal">
+        <option>Mitmachen</option>
+        <option>Jugendfeuerwehr</option>
+        <option>Kinderfeuerwehr</option>
+        <option>Allgemeine Anfrage</option>
+      </select>
+    </label>
+    <label class="grid gap-2 font-bold text-brand-navy">
+      Nachricht
+      <textarea required rows="6" class="rounded-xl border border-slate-300 px-4 py-3 font-normal"></textarea>
+    </label>
+    <label class="flex gap-3 text-sm text-slate-700">
+      <input required type="checkbox" class="mt-1 size-4" />
+      Ich habe den Datenschutzhinweis gelesen und möchte kontaktiert werden.
+    </label>
+    <button
+      type="button"
+      disabled
+      class="cursor-not-allowed rounded-full bg-slate-400 px-6 py-3 font-black text-white"
+      aria-describedby="form-status"
+    >
+      Absenden aktuell deaktiviert
+    </button>
+    <p id="form-status" class="text-sm font-semibold text-slate-700">
+      Aus Datenschutzgründen werden hier noch keine personenbezogenen Daten übertragen. Bitte nutzen Sie die angegebenen direkten Kontaktwege oder die Kontaktseite.
+    </p>
+  </div>
+</section>
