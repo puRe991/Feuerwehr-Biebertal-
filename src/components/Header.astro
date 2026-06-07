@@ -1,0 +1,20 @@
+---
+import MobileNavigation from './MobileNavigation.astro';
+const nav = [
+  { href: '/aktuelles/', label: 'Aktuelles' },
+  { href: '/mitmachen/', label: 'Mitmachen' },
+  { href: '/feuerwehr-biebertal/ueber-uns/', label: 'Feuerwehr' },
+  { href: '/technik/fahrzeuge/', label: 'Technik' },
+  { href: '/buergerinfo/notruf-112/', label: 'Bürgerinfo' },
+  { href: '/kontakt/', label: 'Kontakt' }
+];
+---
+<header class="sticky top-0 z-30 border-b border-white/10 bg-brand-navy/95 text-white backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <a href="/" class="flex items-center gap-3 font-black"><span class="flex size-11 items-center justify-center rounded-2xl bg-brand-red">112</span><span>Feuerwehr<br class="sm:hidden" /> Biebertal</span></a>
+    <nav aria-label="Hauptnavigation" class="hidden gap-5 lg:flex">
+      {nav.map((item) => <a class="text-sm font-bold text-slate-100 hover:text-brand-gold" href={item.href}>{item.label}</a>)}
+    </nav>
+    <MobileNavigation nav={nav} />
+  </div>
+</header>

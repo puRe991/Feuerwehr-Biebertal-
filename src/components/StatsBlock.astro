@@ -1,0 +1,15 @@
+---
+const stats = Astro.props.stats ?? [
+  { value: 'ca. 100', label: 'Einsätze im Jahr' },
+  { value: 'ca. 150', label: 'aktive Einsatzkräfte' },
+  { value: '16', label: 'Fahrzeuge' }
+];
+---
+<div class="grid gap-4 sm:grid-cols-3">
+  {stats.map((stat: { value: string; label: string }) => (
+    <div class="rounded-3xl bg-white/95 p-6 text-center shadow-soft">
+      <p class="text-4xl font-black text-brand-red">{stat.value}</p>
+      <p class="mt-2 font-bold text-brand-navy">{stat.label}</p>
+    </div>
+  ))}
+</div>

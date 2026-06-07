@@ -1,0 +1,11 @@
+---
+const nav = Astro.props.nav;
+---
+<details class="lg:hidden">
+  <summary class="cursor-pointer rounded-full bg-brand-red px-4 py-2 font-bold text-white marker:content-none">Menü</summary>
+  <div class="absolute left-4 right-4 top-20 z-40 rounded-3xl bg-white p-4 shadow-soft">
+    <nav aria-label="Mobile Navigation" class="grid gap-2">
+      {nav.map((item: { href: string; label: string }) => <a class="rounded-xl px-3 py-3 font-bold text-brand-navy hover:bg-brand-mist" href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+</details>
