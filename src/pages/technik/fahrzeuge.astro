@@ -3,6 +3,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import VehicleCard from '@/components/VehicleCard.astro';
 import { fahrzeuge } from '@/data/fahrzeuge';
 ---
-<BaseLayout title="Fahrzeuge" description="Fahrzeugdatenbank der Feuerwehr Biebertal mit Funkrufname, Standort, Typ, Einsatzzweck und Besonderheiten.">
-<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"><h1 class="text-4xl font-black text-brand-navy">Fahrzeuge</h1><p class="mt-4 max-w-3xl text-lg text-slate-600">Die Fahrzeugdaten sind als Kartenlayout vorbereitet. Reale Bilder, Funkrufnamen und technische Daten müssen vor Veröffentlichung geprüft werden.</p><div class="mt-8 grid gap-6 md:grid-cols-2">{fahrzeuge.map((item) => <VehicleCard item={item} />)}</div></section>
+<BaseLayout title="Fahrzeuge" description="Fahrzeuge der Feuerwehr Biebertal: Aufgaben, Standorte und verständliche Einordnung der Technik.">
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <h1 class="text-4xl font-black text-brand-navy">Fahrzeuge</h1>
+    <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">Unsere Fahrzeuge bringen Menschen, Wasser, Geräte und Spezialtechnik schnell zur Einsatzstelle. Die Übersicht erklärt verständlich, wofür die Fahrzeuge eingesetzt werden. Reale Bilder und technische Detaildaten werden vor Veröffentlichung geprüft.</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">{fahrzeuge.map((item) => <VehicleCard item={item} />)}</div>
+  </section>
 </BaseLayout>

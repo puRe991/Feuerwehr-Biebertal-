@@ -15,29 +15,29 @@ export const schutzbereiche: Schutzbereich[] = [
     name: 'Mitte',
     ortsteile: ['Fellingshausen', 'Rodheim-Bieber', 'Vetzberg'],
     feuerwehrhaus: 'Feuerwehrhaus Schutzbereich Mitte',
-    beschreibung: 'Der Schutzbereich Mitte bündelt die Einheiten in den zentralen Ortsteilen und stellt einen wichtigen Teil der kommunalen Gefahrenabwehr.',
-    ansprechpartner: 'Ansprechpartner wird ergänzt',
+    beschreibung: 'Mitte verbindet die zentralen Ortsteile und ist häufig schnell an den wichtigsten Verkehrswegen und Einrichtungen der Gemeinde. Hier trainieren Ehrenamtliche für Brände, technische Hilfe und Einsätze im Alltag.',
+    ansprechpartner: 'Ansprechperson wird ergänzt',
     fahrzeuge: ['HLF 20', 'MTF', 'Anhänger Logistik'],
-    uebungszeiten: 'Übungszeiten werden ergänzt'
+    uebungszeiten: 'Übungszeiten werden nach Freigabe ergänzt'
   },
   {
     slug: 'nord',
     name: 'Nord',
     ortsteile: ['Frankenbach', 'Krumbach'],
     feuerwehrhaus: 'Feuerwehrhaus Schutzbereich Nord',
-    beschreibung: 'Der Schutzbereich Nord sichert die nördlichen Ortsteile und arbeitet eng mit den weiteren Schutzbereichen zusammen.',
-    ansprechpartner: 'Ansprechpartner wird ergänzt',
+    beschreibung: 'Nord sichert die nördlichen Ortsteile und bringt Ortskenntnis, kurze Wege und ein eingespieltes Team zusammen. Bei größeren Lagen arbeitet der Schutzbereich eng mit Mitte und West.',
+    ansprechpartner: 'Ansprechperson wird ergänzt',
     fahrzeuge: ['TSF-W', 'MTF'],
-    uebungszeiten: 'Übungszeiten werden ergänzt'
+    uebungszeiten: 'Übungszeiten werden nach Freigabe ergänzt'
   },
   {
     slug: 'west',
     name: 'West',
     ortsteile: ['Königsberg'],
     feuerwehrhaus: 'Feuerwehrhaus Schutzbereich West',
-    beschreibung: 'Der Schutzbereich West ist für Königsberg zuständig und ergänzt die Einsatzstruktur in Biebertal.',
-    ansprechpartner: 'Ansprechpartner wird ergänzt',
+    beschreibung: 'West steht für Königsberg bereit und stärkt die Feuerwehr Biebertal mit guter Ortskenntnis und flexibler Unterstützung. Auch hier zählt: freiwillig helfen, regelmäßig üben, gemeinsam handeln.',
+    ansprechpartner: 'Ansprechperson wird ergänzt',
     fahrzeuge: ['MLF', 'MTF'],
-    uebungszeiten: 'Übungszeiten werden ergänzt'
+    uebungszeiten: 'Übungszeiten werden nach Freigabe ergänzt'
   }
 ];
