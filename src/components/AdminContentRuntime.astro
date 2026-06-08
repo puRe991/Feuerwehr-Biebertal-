@@ -1,0 +1,179 @@
+---
+const editableSelector = [
+  'main h1',
+  'main h2',
+  'main h3',
+  'main h4',
+  'main h5',
+  'main h6',
+  'main p',
+  'main li',
+  'main a',
+  'main dt',
+  'main dd',
+  'main blockquote',
+  'main figcaption',
+  'main span:not([aria-hidden="true"])'
+].join(', ');
+---
+<script is:inline define:vars={{ editableSelector }}>
+  (() => {
+    const AUTH_KEY = 'fb-admin-authenticated';
+    const OVERRIDE_KEY = 'fb-admin-content-overrides-v1';
+    const EDIT_PARAM = 'adminEdit';
+    const SKIP_SELECTOR = 'script, style, noscript, svg, form, input, textarea, select, button, [data-admin-ignore], [data-admin-toolbar]';
+
+    const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+    if (!isBrowser) return;
+
+    const safeParse = (value, fallback) => {
+      if (!value) return fallback;
+      try {
+        const parsed = JSON.parse(value);
+        return parsed && typeof parsed === 'object' ? parsed : fallback;
+      } catch (error) {
+        console.warn('Admin-Inhalte konnten nicht gelesen werden.', error);
+        return fallback;
+      }
+    };
+
+    const normalizePath = (path) => {
+      if (!path || path === '/') return '/';
+      return path.endsWith('/') ? path : `${path}/`;
+    };
+
+    const getPagePath = () => normalizePath(window.location.pathname);
+
+    const getOverrides = () => safeParse(window.localStorage.getItem(OVERRIDE_KEY), {});
+
+    const setOverrides = (overrides) => {
+      window.localStorage.setItem(OVERRIDE_KEY, JSON.stringify(overrides));
+    };
+
+    const createElementKey = (element, index) => {
+      const tag = element.tagName.toLowerCase();
+      const semantic = [element.id, element.getAttribute('href'), element.getAttribute('aria-label')]
+        .filter(Boolean)
+        .join('|');
+      const baseText = element.dataset.adminOriginal || element.textContent || '';
+      let hash = 0;
+      for (let i = 0; i < baseText.length; i += 1) {
+        hash = (hash * 31 + baseText.charCodeAt(i)) >>> 0;
+      }
+      return `${tag}:${index}:${semantic}:${hash.toString(36)}`;
+    };
+
+    const getEditableElements = () => Array.from(document.querySelectorAll(editableSelector))
+      .filter((element) => {
+        if (!(element instanceof HTMLElement)) return false;
+        if (element.closest(SKIP_SELECTOR)) return false;
+        const text = element.textContent?.trim() || '';
+        if (!text) return false;
+        return !Array.from(element.children).some((child) => child.matches('h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote'));
+      });
+
+    const applyOverrides = () => {
+      const pagePath = getPagePath();
+      const overrides = getOverrides();
+      const pageOverrides = overrides[pagePath] || {};
+      getEditableElements().forEach((element, index) => {
+        if (!(element instanceof HTMLElement)) return;
+        const originalText = element.textContent || '';
+        element.dataset.adminOriginal = originalText;
+        const key = createElementKey(element, index);
+        element.dataset.adminKey = key;
+        const stored = pageOverrides[key];
+        if (typeof stored === 'string' && stored !== originalText) {
+          element.textContent = stored;
+        }
+      });
+    };
+
+    const enableEditing = () => {
+      const pagePath = getPagePath();
+      const toolbar = document.createElement('div');
+      toolbar.dataset.adminToolbar = 'true';
+      toolbar.className = 'fixed inset-x-0 bottom-0 z-[100] border-t border-red-200 bg-white px-4 py-3 shadow-2xl';
+      toolbar.innerHTML = `
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 text-sm text-slate-900">
+          <div>
+            <strong>Admin-Bearbeitung aktiv</strong>
+            <span class="ml-2 text-slate-600">Texte direkt anklicken, ändern und speichern.</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-admin-save class="rounded-lg bg-brand-red px-4 py-2 font-bold text-white">Änderungen speichern</button>
+            <a href="/admin/" class="rounded-lg bg-slate-100 px-4 py-2 font-bold text-slate-900">Dashboard</a>
+            <button type="button" data-admin-exit class="rounded-lg bg-slate-900 px-4 py-2 font-bold text-white">Editor schließen</button>
+          </div>
+        </div>`;
+      document.body.append(toolbar);
+
+      getEditableElements().forEach((element) => {
+        if (!(element instanceof HTMLElement)) return;
+        element.contentEditable = 'true';
+        element.spellcheck = true;
+        element.classList.add('admin-editable-outline');
+        if (element instanceof HTMLAnchorElement) {
+          element.addEventListener('click', (event) => event.preventDefault());
+        }
+        element.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' && !event.shiftKey && element.tagName.toLowerCase() === 'a') {
+            event.preventDefault();
+          }
+        });
+      });
+
+      toolbar.querySelector('[data-admin-save]')?.addEventListener('click', () => {
+        const overrides = getOverrides();
+        const pageOverrides = overrides[pagePath] || {};
+        getEditableElements().forEach((element) => {
+          if (!(element instanceof HTMLElement)) return;
+          const key = element.dataset.adminKey;
+          if (!key) return;
+          const original = element.dataset.adminOriginal || '';
+          const current = element.textContent || '';
+          if (current !== original) {
+            pageOverrides[key] = current;
+          } else {
+            delete pageOverrides[key];
+          }
+        });
+        overrides[pagePath] = pageOverrides;
+        setOverrides(overrides);
+        window.dispatchEvent(new CustomEvent('fb-admin-saved'));
+        toolbar.querySelector('[data-admin-save]').textContent = 'Gespeichert';
+        window.setTimeout(() => {
+          const button = toolbar.querySelector('[data-admin-save]');
+          if (button) button.textContent = 'Änderungen speichern';
+        }, 1600);
+      });
+
+      toolbar.querySelector('[data-admin-exit]')?.addEventListener('click', () => {
+        const url = new URL(window.location.href);
+        url.searchParams.delete(EDIT_PARAM);
+        window.location.href = url.toString();
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyOverrides();
+      const params = new URLSearchParams(window.location.search);
+      const isAuthenticated = window.localStorage.getItem(AUTH_KEY) === 'true';
+      if (params.get(EDIT_PARAM) === '1' && isAuthenticated) {
+        enableEditing();
+      }
+    });
+  })();
+</script>
+<style is:global>
+  .admin-editable-outline {
+    outline: 2px dashed rgba(220, 38, 38, 0.55);
+    outline-offset: 4px;
+    cursor: text;
+  }
+
+  .admin-editable-outline:focus {
+    outline: 3px solid rgba(220, 38, 38, 0.9);
+    background: rgba(254, 242, 242, 0.88);
+  }
+</style>

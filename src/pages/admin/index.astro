@@ -1,0 +1,171 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { fahrzeuge } from '@/data/fahrzeuge';
+
+const pages = [
+  { path: '/', label: 'Startseite' },
+  { path: '/aktuelles/', label: 'Aktuelles' },
+  { path: '/aktuelles/einsatzberichte/', label: 'Einsatzberichte' },
+  { path: '/aktuelles/presse/', label: 'Presse' },
+  { path: '/aktuelles/veranstaltungen/', label: 'Veranstaltungen' },
+  { path: '/mitmachen/', label: 'Mitmachen' },
+  { path: '/mitmachen/einsatzabteilung/', label: 'Einsatzabteilung' },
+  { path: '/mitmachen/jugendfeuerwehr/', label: 'Jugendfeuerwehr' },
+  { path: '/mitmachen/kinderfeuerwehr/', label: 'Kinderfeuerwehr' },
+  { path: '/mitmachen/quereinsteiger/', label: 'Quereinsteiger' },
+  { path: '/mitmachen/faq/', label: 'FAQ' },
+  { path: '/feuerwehr-biebertal/ueber-uns/', label: 'Über uns' },
+  { path: '/feuerwehr-biebertal/schutzbereiche/', label: 'Schutzbereiche' },
+  { path: '/feuerwehr-biebertal/standorte/', label: 'Standorte' },
+  { path: '/feuerwehr-biebertal/leitung/', label: 'Leitung' },
+  { path: '/feuerwehr-biebertal/feuerwehrvereine/', label: 'Feuerwehrvereine' },
+  { path: '/technik/fahrzeuge/', label: 'Fahrzeuge' },
+  ...fahrzeuge.map((fahrzeug) => ({ path: `/technik/fahrzeuge/${fahrzeug.slug}/`, label: `Fahrzeug: ${fahrzeug.funk}` })),
+  { path: '/technik/drohne/', label: 'Drohne' },
+  { path: '/technik/hygienekomponente/', label: 'Hygienekomponente' },
+  { path: '/technik/katastrophenschutz/', label: 'Katastrophenschutz' },
+  { path: '/buergerinfo/notruf-112/', label: 'Notruf 112' },
+  { path: '/buergerinfo/verhalten-im-brandfall/', label: 'Verhalten im Brandfall' },
+  { path: '/buergerinfo/rauchmelder/', label: 'Rauchmelder' },
+  { path: '/buergerinfo/rettungsgasse/', label: 'Rettungsgasse' },
+  { path: '/buergerinfo/warn-apps/', label: 'Warn-Apps' },
+  { path: '/buergerinfo/unwetter/', label: 'Unwetter' },
+  { path: '/buergerinfo/waldbrand/', label: 'Waldbrand' },
+  { path: '/buergerinfo/hydranten-freihalten/', label: 'Hydranten freihalten' },
+  { path: '/kontakt/', label: 'Kontakt' },
+  { path: '/impressum/', label: 'Impressum' },
+  { path: '/datenschutz/', label: 'Datenschutz' },
+  { path: '/barrierefreiheit/', label: 'Barrierefreiheit' }
+];
+---
+<BaseLayout title="Admin Dashboard" description="Dashboard zur lokalen Bearbeitung der Website-Inhalte.">
+  <section class="bg-brand-navy py-16 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <p class="text-sm font-black uppercase tracking-[0.25em] text-brand-gold">Admin Dashboard</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_22rem] lg:items-end">
+        <div>
+          <h1 class="text-4xl font-black sm:text-5xl">Inhalte bearbeiten</h1>
+          <p class="mt-4 max-w-3xl text-lg text-slate-200">
+            Wähle eine Seite aus, aktiviere den visuellen Editor und speichere Textänderungen lokal im Browser.
+          </p>
+        </div>
+        <div class="rounded-3xl bg-white/10 p-5 text-sm text-slate-100 ring-1 ring-white/15">
+          <strong class="text-white">Wichtig:</strong> Die Änderungen landen im Local Storage dieses Browsers. Exportiere sie als Backup, wenn du sie auf ein anderes Gerät übertragen willst.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" data-admin-ignore>
+    <div id="auth-warning" class="hidden rounded-2xl bg-red-50 p-5 text-red-800 ring-1 ring-red-100">
+      Du bist nicht angemeldet. Du wirst zum Login weitergeleitet.
+    </div>
+
+    <div id="dashboard-content" class="grid gap-8 lg:grid-cols-[1fr_22rem]">
+      <div>
+        <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <h2 class="text-2xl font-black text-brand-navy">Seiten</h2>
+          <input id="page-filter" class="w-full rounded-xl border border-slate-300 px-4 py-3 sm:w-80" placeholder="Seiten filtern …" type="search" />
+        </div>
+        <div id="page-list" class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {pages.map((page) => (
+            <a class="admin-page-card rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md" data-page-label={page.label.toLowerCase()} href={`${page.path}?adminEdit=1`}>
+              <span class="block text-lg font-black text-brand-navy">{page.label}</span>
+              <span class="mt-2 block text-sm text-slate-600">{page.path}</span>
+              <span class="mt-4 inline-flex rounded-full bg-brand-mist px-3 py-1 text-xs font-black uppercase tracking-wide text-brand-red">Bearbeiten</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <aside class="space-y-5">
+        <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+          <h2 class="text-xl font-black text-brand-navy">Werkzeuge</h2>
+          <div class="mt-5 grid gap-3">
+            <button id="export-content" class="rounded-xl bg-brand-red px-4 py-3 font-black text-white" type="button">Inhalte exportieren</button>
+            <label class="cursor-pointer rounded-xl bg-slate-100 px-4 py-3 text-center font-black text-slate-900">
+              Inhalte importieren
+              <input id="import-content" class="sr-only" type="file" accept="application/json" />
+            </label>
+            <button id="reset-content" class="rounded-xl border border-red-200 px-4 py-3 font-black text-red-700" type="button">Lokale Änderungen löschen</button>
+            <button id="logout" class="rounded-xl bg-slate-900 px-4 py-3 font-black text-white" type="button">Ausloggen</button>
+          </div>
+          <p id="tool-message" class="mt-4 text-sm font-semibold text-slate-700" role="status"></p>
+        </div>
+
+        <div class="rounded-3xl bg-amber-50 p-6 text-sm text-amber-900 ring-1 ring-amber-100">
+          <h2 class="font-black">Sicherheitsrisiko</h2>
+          <p class="mt-2">Der Default-Login <strong>admin/admin</strong> ist nur für eine statische Demo geeignet. Nutze produktiv eine echte Authentifizierung mit Server, Rollenmodell und Passwort-Hashing.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  const AUTH_KEY = 'fb-admin-authenticated';
+  const OVERRIDE_KEY = 'fb-admin-content-overrides-v1';
+  const isAuthenticated = localStorage.getItem(AUTH_KEY) === 'true';
+  const dashboard = document.querySelector('#dashboard-content');
+  const warning = document.querySelector('#auth-warning');
+  const message = document.querySelector('#tool-message');
+
+  if (!isAuthenticated) {
+    dashboard?.classList.add('hidden');
+    warning?.classList.remove('hidden');
+    window.setTimeout(() => { window.location.href = '/admin/login/'; }, 900);
+  }
+
+  const setMessage = (text: string) => {
+    if (message) message.textContent = text;
+  };
+
+  document.querySelector('#page-filter')?.addEventListener('input', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement)) return;
+    const query = target.value.toLowerCase().trim();
+    document.querySelectorAll('.admin-page-card').forEach((card) => {
+      const label = card.getAttribute('data-page-label') || '';
+      card.classList.toggle('hidden', Boolean(query) && !label.includes(query));
+    });
+  });
+
+  document.querySelector('#export-content')?.addEventListener('click', () => {
+    const content = localStorage.getItem(OVERRIDE_KEY) || '{}';
+    const blob = new Blob([content], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `feuerwehr-biebertal-content-${new Date().toISOString().slice(0, 10)}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    setMessage('Export erstellt.');
+  });
+
+  document.querySelector('#import-content')?.addEventListener('change', async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement)) return;
+    const [file] = target.files || [];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      JSON.parse(text);
+      localStorage.setItem(OVERRIDE_KEY, text);
+      setMessage('Import erfolgreich. Lade die betroffenen Seiten neu.');
+    } catch (error) {
+      console.error(error);
+      setMessage('Import fehlgeschlagen: Die Datei enthält kein gültiges JSON.');
+    }
+  });
+
+  document.querySelector('#reset-content')?.addEventListener('click', () => {
+    const confirmed = window.confirm('Alle lokal gespeicherten Inhaltsänderungen wirklich löschen?');
+    if (!confirmed) return;
+    localStorage.removeItem(OVERRIDE_KEY);
+    setMessage('Lokale Inhaltsänderungen gelöscht.');
+  });
+
+  document.querySelector('#logout')?.addEventListener('click', () => {
+    localStorage.removeItem(AUTH_KEY);
+    window.location.href = '/admin/login/';
+  });
+</script>
