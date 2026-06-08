@@ -10,8 +10,14 @@ import { einsatzberichte } from '@/data/einsatzberichte';
     <h1 class="text-4xl font-black text-brand-navy">Aktuelles</h1>
     <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">Hier finden Sie Meldungen der Feuerwehr Biebertal. Einsatzberichte erscheinen nicht live, sondern erst nach Prüfung und ohne sensible Details.</p>
     <h2 class="mt-10 text-2xl font-black text-brand-navy">Meldungen</h2>
-    <div class="mt-6 grid gap-6 md:grid-cols-3">{news.map((item) => <NewsCard item={item} />)}</div>
+    <div class="mt-6 grid gap-6 md:grid-cols-3">
+      {news.map((item) => <NewsCard item={item} />)}
+    </div>
+    <div class="mt-6 hidden grid gap-6 md:grid-cols-3" data-admin-posts-list="news" aria-label="Lokal erstellte Meldungen"></div>
     <h2 class="mt-12 text-2xl font-black text-brand-navy">Einsatzberichte</h2>
-    <div class="mt-6 grid gap-6 md:grid-cols-2">{einsatzberichte.map((item) => <EinsatzberichtCard item={item} />)}</div>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      {einsatzberichte.map((item) => <EinsatzberichtCard item={item} />)}
+    </div>
+    <div class="mt-6 hidden grid gap-6 md:grid-cols-2" data-admin-posts-list="incident" aria-label="Lokal erstellte Einsatzberichte"></div>
   </section>
 </BaseLayout>
