@@ -8,7 +8,8 @@ Modernes, statisches Astro-Projekt für die Freiwillige Feuerwehr Biebertal. Der
 - Tailwind CSS
 - Statischer Build ohne Tracking-Skripte
 - Systemschriften statt extern geladener Fonts
-- Beispielinhalte in `src/data/*`
+- Directus als optionales Headless CMS für Meldungen und Einsatzberichte
+- Beispielinhalte in `src/data/*` als robuste Fallbacks
 
 ## Entwicklung
 
@@ -18,9 +19,46 @@ npm run dev
 npm run build
 ```
 
+## Directus CMS konfigurieren
+
+Die Website liest beim Build Meldungen und Einsatzberichte aus Directus. Wenn Directus nicht konfiguriert ist, nicht erreichbar ist oder keine gültigen Datensätze liefert, nutzt der Build automatisch die lokalen Fallback-Daten aus `src/data/*`.
+
+1. `.env.example` nach `.env` kopieren.
+2. `PUBLIC_DIRECTUS_URL` auf die öffentliche Directus-URL setzen, z. B. `https://cms.example.org`.
+3. Optional `DIRECTUS_TOKEN` setzen, wenn die Collections nicht öffentlich lesbar sind. Dieses Token darf nicht mit `PUBLIC_` beginnen.
+4. Optional `ENABLE_DIRECTUS=false` setzen, um für lokale Tests ausschließlich Fallback-Daten zu verwenden.
+
+Erwartete Collections und Felder:
+
+### Collection `news`
+
+| Feld | Pflicht | Hinweis |
+| --- | --- | --- |
+| `slug` | ja | URL-tauglicher eindeutiger Bezeichner |
+| `titel` oder `title` | ja | Überschrift |
+| `kategorie` oder `category` | ja | `Veranstaltung`, `Presse` oder `Hinweis` |
+| `datum` oder `date` | ja | Datum oder ISO-Zeitstempel |
+| `teaser` | ja | Kurztext für Karten |
+| `status` | empfohlen | Nur `published` wird geladen |
+
+### Collection `einsatzberichte`
+
+| Feld | Pflicht | Hinweis |
+| --- | --- | --- |
+| `slug` | ja | URL-tauglicher eindeutiger Bezeichner |
+| `datum` oder `date` | ja | Datum oder ISO-Zeitstempel |
+| `einsatzart` oder `incident_type` | ja | Öffentliche Einsatzart |
+| `ortsteil` oder `district` | ja | Freigegebener Ortsbezug |
+| `kurzbeschreibung` oder `summary` | ja | Datenschutzgeprüfte Zusammenfassung |
+| `einheiten` oder `units` | nein | Array oder kommagetrennte Liste |
+| `datenschutzHinweis` oder `privacy_notice` | ja | Hinweistext zur Veröffentlichung |
+| `status` | empfohlen | Nur `published` wird geladen |
+
+Wichtig: Einsatzberichte dürfen erst nach interner Freigabe veröffentlicht werden. Directus-Rollen sollten Schreibrechte eng begrenzen und öffentliche API-Zugriffe nur auf freigegebene Felder erlauben.
+
 ## Inhalte pflegen
 
-Beispieldaten liegen in:
+Primäre CMS-Inhalte liegen in Directus. Lokale Fallbacks und strukturierte Beispieldaten liegen in:
 
 - `src/data/schutzbereiche.ts`
 - `src/data/fahrzeuge.ts`
@@ -28,7 +66,7 @@ Beispieldaten liegen in:
 - `src/data/einsatzberichte.ts`
 - `src/data/ansprechpartner.ts`
 
-Große Inhaltsbereiche liegen als Astro-Seiten in `src/pages`. Für ein späteres Headless CMS können die Datenmodule durch Markdown/MDX, Directus oder Strapi ersetzt werden.
+Große Inhaltsbereiche liegen weiterhin als Astro-Seiten in `src/pages`.
 
 ## Vor Veröffentlichung ersetzen oder prüfen
 

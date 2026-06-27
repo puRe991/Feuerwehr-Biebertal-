@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import NewsCard from '@/components/NewsCard.astro';
+import { getNews } from '@/lib/directus';
+
+const presseNews = (await getNews()).filter((item) => item.kategorie === 'Presse');
 ---
 <BaseLayout title="Presse" description="Presseinformationen der Feuerwehr Biebertal und Hinweise zur verantwortungsvollen Veröffentlichung.">
   <section class="mx-auto max-w-5xl px-4 py-16 prose-page">
@@ -14,6 +18,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
     <section class="mt-10 not-prose">
       <h2 class="text-2xl font-black text-brand-navy">Lokale Pressemitteilungen</h2>
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
+        {presseNews.map((item) => <NewsCard item={item} />)}
+      </div>
       <div class="mt-6 hidden grid gap-6 md:grid-cols-2" data-admin-posts-list="news" data-admin-post-category="Presse" aria-label="Lokale Pressemitteilungen"></div>
     </section>
   </section>
