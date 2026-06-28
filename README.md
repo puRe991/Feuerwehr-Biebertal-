@@ -25,8 +25,11 @@ Die Website liest beim Build Meldungen und Einsatzberichte aus Directus. Wenn Di
 
 1. `.env.example` nach `.env` kopieren.
 2. `PUBLIC_DIRECTUS_URL` auf die öffentliche Directus-URL setzen, z. B. `https://cms.example.org`.
-3. Optional `DIRECTUS_TOKEN` setzen, wenn die Collections nicht öffentlich lesbar sind. Dieses Token darf nicht mit `PUBLIC_` beginnen.
-4. Optional `ENABLE_DIRECTUS=false` setzen, um für lokale Tests ausschließlich Fallback-Daten zu verwenden.
+3. Optional `PUBLIC_CMS_ADMIN_URL` setzen, wenn der sichtbare CMS-Login auf eine separate Admin-Adresse zeigen soll. Wenn leer, nutzt die Website `PUBLIC_DIRECTUS_URL`.
+4. Optional `DIRECTUS_TOKEN` setzen, wenn die Collections nicht öffentlich lesbar sind. Dieses Token darf nicht mit `PUBLIC_` beginnen.
+5. Optional `ENABLE_DIRECTUS=false` setzen, um für lokale Tests ausschließlich Fallback-Daten zu verwenden.
+
+Der öffentliche Website-Build enthält keinen eigenen Admin-Login. Navigationslinks zum CMS erscheinen nur, wenn eine gültige CMS-URL konfiguriert ist. `/admin/login/` dient als abgesicherte Weiterleitungs- und Hinweisseite für Redakteurinnen und Redakteure.
 
 Erwartete Collections und Felder:
 

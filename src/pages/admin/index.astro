@@ -1,15 +1,23 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { cmsAdminUrl, hasCmsAdmin } from '@/lib/cmsAdmin';
 ---
-<BaseLayout title="Admin deaktiviert" description="Der lokale Demo-Admin ist für den Live-Betrieb deaktiviert." noindex={true}>
+<BaseLayout title="Redaktion und CMS" description="Hinweise zum sicheren redaktionellen Betrieb der Feuerwehr-Biebertal-Website." noindex={true}>
   <section class="bg-brand-navy py-16 text-white">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <p class="text-sm font-black uppercase tracking-[0.25em] text-brand-gold">Admin</p>
-      <h1 class="mt-4 text-4xl font-black sm:text-5xl">Redaktion nur über ein sicheres CMS</h1>
+      <p class="text-sm font-black uppercase tracking-[0.25em] text-brand-gold">Redaktion</p>
+      <h1 class="mt-4 text-4xl font-black sm:text-5xl">CMS statt lokalem Website-Login</h1>
       <p class="mt-4 text-lg leading-8 text-slate-200">
-        Der lokale Browser-Editor ist im Live-Build deaktiviert. Inhalte werden vor Veröffentlichung geprüft und über einen abgesicherten Deployment- oder CMS-Prozess gepflegt.
+        Der lokale Browser-Editor bleibt deaktiviert. Inhalte werden über ein abgesichertes CMS gepflegt, intern freigegeben und anschließend von der statischen Website ausgeliefert.
       </p>
-      <a class="mt-8 inline-flex rounded-xl bg-brand-red px-5 py-3 font-black text-white hover:bg-red-700" href="/">Zur Website</a>
+      <div class="mt-8 flex flex-wrap gap-3">
+        {hasCmsAdmin && cmsAdminUrl ? (
+          <a class="inline-flex rounded-xl bg-brand-red px-5 py-3 font-black text-white hover:bg-red-700" href={cmsAdminUrl} rel="noopener noreferrer">CMS-Login öffnen</a>
+        ) : (
+          <a class="inline-flex rounded-xl bg-brand-red px-5 py-3 font-black text-white hover:bg-red-700" href="/admin/login/">CMS-Konfiguration prüfen</a>
+        )}
+        <a class="inline-flex rounded-xl border border-white/20 px-5 py-3 font-black text-white hover:border-brand-gold hover:text-brand-gold" href="/">Zur Website</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

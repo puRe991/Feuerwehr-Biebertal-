@@ -1,5 +1,6 @@
 ---
 import MobileNavigation from './MobileNavigation.astro';
+import { cmsAdminUrl, hasCmsAdmin } from '@/lib/cmsAdmin';
 const nav = [
   { href: '/aktuelles/', label: 'Aktuelles' },
   { href: '/mitmachen/', label: 'Mitmachen' },
@@ -16,7 +17,7 @@ const nav = [
       <nav aria-label="Hauptnavigation" class="flex gap-5">
         {nav.map((item) => <a class="text-sm font-bold text-slate-100 hover:text-brand-gold" href={item.href}>{item.label}</a>)}
       </nav>
-      <a class="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-black text-white transition hover:border-brand-gold hover:text-brand-gold" href="/admin/login/">Login</a>
+      {hasCmsAdmin && cmsAdminUrl && <a class="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-black text-white transition hover:border-brand-gold hover:text-brand-gold" href={cmsAdminUrl} rel="noopener noreferrer">CMS-Login</a>}
     </div>
     <MobileNavigation nav={nav} />
   </div>
