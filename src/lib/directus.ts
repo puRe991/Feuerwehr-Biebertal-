@@ -37,6 +37,7 @@ type DirectusEinsatzbericht = Partial<{
 const DIRECTUS_URL = import.meta.env.DIRECTUS_URL || import.meta.env.PUBLIC_DIRECTUS_URL;
 const DIRECTUS_TOKEN = import.meta.env.DIRECTUS_TOKEN;
 const ENABLE_DIRECTUS = String(import.meta.env.ENABLE_DIRECTUS ?? 'true') !== 'false';
+const REQUIRE_DIRECTUS = import.meta.env.PROD && String(import.meta.env.REQUIRE_DIRECTUS ?? 'false') === 'true';
 
 const NEWS_CATEGORIES = new Set<NewsItem['kategorie']>(['Veranstaltung', 'Presse', 'Hinweis']);
 
@@ -44,6 +45,13 @@ const isNewsItem = (item: NewsItem | undefined): item is NewsItem => Boolean(ite
 const isEinsatzbericht = (item: Einsatzbericht | undefined): item is Einsatzbericht => Boolean(item);
 
 const isConfigured = () => ENABLE_DIRECTUS && typeof DIRECTUS_URL === 'string' && DIRECTUS_URL.trim().length > 0;
+
+const handleDirectusFailure = (message: string, error?: unknown) => {
+  if (REQUIRE_DIRECTUS) {
+    throw new Error(error instanceof Error ? `${message}: ${error.message}` : message);
+  }
+  console.warn(message, error ?? '');
+};
 
 const normalizeBaseUrl = (url: string) => url.replace(/\/+$/, '');
 
@@ -67,7 +75,10 @@ const asUnits = (value: DirectusEinsatzbericht['einheiten']) => {
 };
 
 const getJson = async <T>(collection: string, searchParams: URLSearchParams): Promise<T[]> => {
-  if (!isConfigured()) return [];
+  if (!isConfigured()) {
+    if (REQUIRE_DIRECTUS) handleDirectusFailure(`Directus collection "${collection}" ist nicht konfiguriert.`);
+    return [];
+  }
 
   const url = new URL(`${normalizeBaseUrl(DIRECTUS_URL)}/items/${collection}`);
   searchParams.forEach((value, key) => url.searchParams.set(key, value));
@@ -78,14 +89,14 @@ const getJson = async <T>(collection: string, searchParams: URLSearchParams): Pr
   try {
     const response = await fetch(url, { headers });
     if (!response.ok) {
-      console.warn(`Directus collection "${collection}" konnte nicht geladen werden: ${response.status} ${response.statusText}`);
+      handleDirectusFailure(`Directus collection "${collection}" konnte nicht geladen werden: ${response.status} ${response.statusText}`);
       return [];
     }
 
     const payload = (await response.json()) as DirectusListResponse<T>;
     return Array.isArray(payload.data) ? payload.data : [];
   } catch (error) {
-    console.warn(`Directus collection "${collection}" konnte nicht geladen werden.`, error);
+    handleDirectusFailure(`Directus collection "${collection}" konnte nicht geladen werden.`, error);
     return [];
   }
 };

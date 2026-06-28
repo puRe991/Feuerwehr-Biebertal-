@@ -1,3 +1,6 @@
+---
+const contactEmail = 'kontakt@feuerwehr-biebertal.de';
+---
 <section
   class="grid gap-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-soft"
   aria-describedby="form-hinweis"
@@ -6,22 +9,23 @@
   <div class="grid gap-2">
     <h2 id="contact-form-heading" class="text-xl font-black text-brand-navy">Kontakt aufnehmen</h2>
     <p id="form-hinweis" class="text-sm text-slate-600">
-      Das Formular ist noch nicht aktiv. Für den Betrieb braucht es eine datensparsame Verarbeitung mit Spam-Schutz. Bitte nutzen Sie bis dahin die direkten Kontaktwege auf der Kontaktseite.
+      Senden Sie Ihre Anfrage datensparsam per E-Mail. Das Formular öffnet Ihr E-Mail-Programm und überträgt keine Daten an diese Website.
+      Im Notfall wählen Sie immer <strong>112</strong>.
     </p>
   </div>
 
-  <div role="form" aria-describedby="form-hinweis form-status" class="grid gap-5">
+  <form id="contact-form" class="grid gap-5" data-contact-email={contactEmail} novalidate>
     <label class="grid gap-2 font-bold text-brand-navy">
       Name
-      <input required autocomplete="name" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" />
+      <input id="contact-name" name="name" required autocomplete="name" maxlength="120" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" />
     </label>
     <label class="grid gap-2 font-bold text-brand-navy">
       E-Mail
-      <input required type="email" autocomplete="email" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" />
+      <input id="contact-email" name="email" required type="email" autocomplete="email" maxlength="160" class="rounded-xl border border-slate-300 px-4 py-3 font-normal" />
     </label>
     <label class="grid gap-2 font-bold text-brand-navy">
       Thema
-      <select class="rounded-xl border border-slate-300 px-4 py-3 font-normal">
+      <select id="contact-topic" name="topic" class="rounded-xl border border-slate-300 px-4 py-3 font-normal">
         <option>Mitmachen</option>
         <option>Einsatzabteilung</option>
         <option>Jugendfeuerwehr</option>
@@ -32,22 +36,45 @@
     </label>
     <label class="grid gap-2 font-bold text-brand-navy">
       Nachricht
-      <textarea required rows="6" class="rounded-xl border border-slate-300 px-4 py-3 font-normal"></textarea>
+      <textarea id="contact-message" name="message" required rows="6" maxlength="2500" class="rounded-xl border border-slate-300 px-4 py-3 font-normal"></textarea>
     </label>
     <label class="flex gap-3 text-sm text-slate-700">
-      <input required type="checkbox" class="mt-1 size-4" />
+      <input id="contact-privacy" required type="checkbox" class="mt-1 size-4" />
       Ich habe den Datenschutzhinweis gelesen und möchte kontaktiert werden.
     </label>
     <button
-      type="button"
-      disabled
-      class="cursor-not-allowed rounded-full bg-slate-400 px-6 py-3 font-black text-white"
+      class="rounded-full bg-brand-red px-6 py-3 font-black text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-200"
+      type="submit"
       aria-describedby="form-status"
     >
-      Absenden aktuell deaktiviert
+      E-Mail vorbereiten
     </button>
-    <p id="form-status" class="text-sm font-semibold text-slate-700">
-      Es werden aktuell keine personenbezogenen Daten über dieses Formular übertragen.
+    <p id="form-status" class="text-sm font-semibold text-slate-700" role="status">
+      Alternativ schreiben Sie direkt an <a class="font-black text-brand-red underline" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
     </p>
-  </div>
+  </form>
 </section>
+
+<script>
+  const form = document.querySelector('#contact-form');
+  const status = document.querySelector('#form-status');
+  const normalize = (value: FormDataEntryValue | null, maxLength: number) => String(value || '').replace(/[\u0000-\u001F\u007F]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, maxLength);
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!(form instanceof HTMLFormElement)) return;
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const recipient = form.dataset.contactEmail || 'kontakt@feuerwehr-biebertal.de';
+    const name = normalize(data.get('name'), 120);
+    const email = normalize(data.get('email'), 160);
+    const topic = normalize(data.get('topic'), 80);
+    const message = normalize(data.get('message'), 2500);
+    const subject = encodeURIComponent(`Kontaktanfrage Feuerwehr Biebertal: ${topic}`);
+    const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\nThema: ${topic}\n\nNachricht:\n${message}\n\nHinweis: Diese Nachricht wurde lokal im Browser vorbereitet.`);
+
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    if (status) status.textContent = 'Ihr E-Mail-Programm wurde geöffnet. Bitte prüfen und senden Sie die Nachricht dort ab.';
+  });
+</script>
