@@ -16,9 +16,9 @@ export const schutzbereiche: Schutzbereich[] = [
     ortsteile: ['Fellingshausen', 'Rodheim-Bieber', 'Vetzberg'],
     feuerwehrhaus: 'Feuerwehrhaus Schutzbereich Mitte',
     beschreibung: 'Mitte verbindet die zentralen Ortsteile und ist häufig schnell an den wichtigsten Verkehrswegen und Einrichtungen der Gemeinde. Hier trainieren Ehrenamtliche für Brände, technische Hilfe und Einsätze im Alltag.',
-    ansprechpartner: 'Ansprechperson wird ergänzt',
+    ansprechpartner: 'Kontakt über die Gemeindebrandinspektion',
     fahrzeuge: ['HLF 20', 'MTF', 'Anhänger Logistik'],
-    uebungszeiten: 'Übungszeiten werden nach Freigabe ergänzt'
+    uebungszeiten: 'Termine auf Anfrage über die Kontaktseite'
   },
   {
     slug: 'nord',
@@ -26,9 +26,9 @@ export const schutzbereiche: Schutzbereich[] = [
     ortsteile: ['Frankenbach', 'Krumbach'],
     feuerwehrhaus: 'Feuerwehrhaus Schutzbereich Nord',
     beschreibung: 'Nord sichert die nördlichen Ortsteile und bringt Ortskenntnis, kurze Wege und ein eingespieltes Team zusammen. Bei größeren Lagen arbeitet der Schutzbereich eng mit Mitte und West.',
-    ansprechpartner: 'Ansprechperson wird ergänzt',
+    ansprechpartner: 'Kontakt über die Gemeindebrandinspektion',
     fahrzeuge: ['TSF-W', 'MTF'],
-    uebungszeiten: 'Übungszeiten werden nach Freigabe ergänzt'
+    uebungszeiten: 'Termine auf Anfrage über die Kontaktseite'
   },
   {
     slug: 'west',
@@ -36,8 +36,8 @@ export const schutzbereiche: Schutzbereich[] = [
     ortsteile: ['Königsberg'],
     feuerwehrhaus: 'Feuerwehrhaus Schutzbereich West',
     beschreibung: 'West steht für Königsberg bereit und stärkt die Feuerwehr Biebertal mit guter Ortskenntnis und flexibler Unterstützung. Auch hier zählt: freiwillig helfen, regelmäßig üben, gemeinsam handeln.',
-    ansprechpartner: 'Ansprechperson wird ergänzt',
+    ansprechpartner: 'Kontakt über die Gemeindebrandinspektion',
     fahrzeuge: ['MLF', 'MTF'],
-    uebungszeiten: 'Übungszeiten werden nach Freigabe ergänzt'
+    uebungszeiten: 'Termine auf Anfrage über die Kontaktseite'
   }
 ];

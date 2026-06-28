@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Feuerwehr Biebertal</title>
+  <desc id="desc">Social Preview der Feuerwehr Biebertal Website</desc>
+  <rect width="1200" height="630" fill="#071a33"/>
+  <path d="M0 500h1200v130H0z" fill="#b91c1c"/>
+  <circle cx="180" cy="170" r="86" fill="#f2b705"/>
+  <path d="M180 72c35 54 74 97 74 145a74 74 0 0 1-148 0c0-48 39-91 74-145z" fill="#b91c1c"/>
+  <text x="310" y="190" fill="#fff" font-family="Arial, sans-serif" font-size="72" font-weight="800">Feuerwehr Biebertal</text>
+  <text x="314" y="275" fill="#dbeafe" font-family="Arial, sans-serif" font-size="34" font-weight="600">Freiwillig im Einsatz. Informiert. Sicher.</text>
+  <text x="314" y="545" fill="#fff" font-family="Arial, sans-serif" font-size="42" font-weight="800">Im Notfall: 112</text>
+</svg>
