@@ -37,7 +37,7 @@ Die Website liest beim Build Meldungen und Einsatzberichte aus Directus. Wenn Di
 4. Optional `DIRECTUS_TOKEN` setzen, wenn die Collections nicht öffentlich lesbar sind. Dieses Token darf nicht mit `PUBLIC_` beginnen.
 5. Optional `ENABLE_DIRECTUS=false` setzen, um für lokale Tests ausschließlich Fallback-Daten zu verwenden.
 
-Für lokales Debugging kann Directus mit `npm run cms:dev` unter `http://localhost:8055` laufen; dann funktionieren `/admin/` und `/admin/login/` auch ohne lokale `.env` als Weiterleitung zum lokalen CMS. Wenn `localhost:8055` die Verbindung ablehnt, läuft der separate Directus-Container noch nicht. Der öffentliche Website-Build enthält keinen eigenen Admin-Login. Navigationslinks zum CMS erscheinen nur, wenn eine gültige CMS-URL konfiguriert ist. `/admin/login/` dient als abgesicherte Weiterleitungs- und Hinweisseite für Redakteurinnen und Redakteure.
+Für lokales Debugging kann Directus unter `http://localhost:8055` laufen; dann funktionieren `/admin/` und `/admin/login/` auch ohne lokale `.env` als Weiterleitung zum lokalen CMS. Der öffentliche Website-Build enthält keinen eigenen Admin-Login. Navigationslinks zum CMS erscheinen nur, wenn eine gültige CMS-URL konfiguriert ist. `/admin/login/` dient als abgesicherte Weiterleitungs- und Hinweisseite für Redakteurinnen und Redakteure.
 
 Erwartete Collections und Felder:
 
