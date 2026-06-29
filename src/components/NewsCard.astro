@@ -8,5 +8,5 @@ const date = new Intl.DateTimeFormat('de-DE', { dateStyle: 'medium' }).format(ne
   <p class="text-sm font-bold text-slate-500">{date} · {item.kategorie}</p>
   <h3 class="mt-2 text-xl font-black text-brand-navy">{item.titel}</h3>
   <p class="mt-3 leading-7 text-slate-600">{item.teaser}</p>
-  <a href="/aktuelles/" class="mt-5 inline-flex font-extrabold text-brand-red underline-offset-4 hover:underline">Zur Meldung</a>
+  <a href={`/aktuelles/${item.slug}/`} class="mt-5 inline-flex font-extrabold text-brand-red underline-offset-4 hover:underline" aria-label={`Zur Meldung: ${item.titel}`}>Zur Meldung</a>
 </article>
