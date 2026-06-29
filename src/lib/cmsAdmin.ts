@@ -22,3 +22,5 @@ const toValidHttpUrl = (value: unknown) => {
 
 export const cmsAdminUrl = toValidHttpUrl(rawCmsAdminUrl);
 export const hasCmsAdmin = Boolean(cmsAdminUrl);
+export const usesLocalCmsFallback =
+  !configuredCmsAdminUrl && import.meta.env.DEV && cmsAdminUrl === LOCAL_DIRECTUS_URL;

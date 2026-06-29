@@ -19,6 +19,14 @@ npm run dev
 npm run build
 ```
 
+Lokales CMS zum Debuggen starten:
+
+```bash
+npm run cms:dev
+```
+
+Der lokale Directus-Login ist danach unter `http://localhost:8055` erreichbar. Die vorkonfigurierten Debug-Zugangsdaten sind `admin@example.org` / `admin123456`. Diese Zugangsdaten sind nur für lokale Entwicklung gedacht und dürfen nicht produktiv verwendet werden.
+
 ## Directus CMS konfigurieren
 
 Die Website liest beim Build Meldungen und Einsatzberichte aus Directus. Wenn Directus nicht konfiguriert ist, nicht erreichbar ist oder keine gültigen Datensätze liefert, nutzt der Build automatisch die lokalen Fallback-Daten aus `src/data/*`.
