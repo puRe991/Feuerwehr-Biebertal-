@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
+    "cms:dev": "node scripts/start-local-directus.mjs",
     "build": "astro check && astro build",
     "preview": "astro preview --host 0.0.0.0",
-    "check": "astro check"
+    "check": "astro check",
+    "cms:dev:docker": "docker compose -f docker-compose.directus.yml up"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",

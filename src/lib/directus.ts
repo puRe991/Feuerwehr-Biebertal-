@@ -34,7 +34,11 @@ type DirectusEinsatzbericht = Partial<{
   status: string;
 }>;
 
-const DIRECTUS_URL = import.meta.env.DIRECTUS_URL || import.meta.env.PUBLIC_DIRECTUS_URL;
+const LOCAL_DIRECTUS_URL = 'http://localhost:8055';
+const DIRECTUS_URL =
+  import.meta.env.DIRECTUS_URL ||
+  import.meta.env.PUBLIC_DIRECTUS_URL ||
+  (import.meta.env.DEV ? LOCAL_DIRECTUS_URL : undefined);
 const DIRECTUS_TOKEN = import.meta.env.DIRECTUS_TOKEN;
 const ENABLE_DIRECTUS = String(import.meta.env.ENABLE_DIRECTUS ?? 'true') !== 'false';
 const REQUIRE_DIRECTUS = import.meta.env.PROD && String(import.meta.env.REQUIRE_DIRECTUS ?? 'false') === 'true';

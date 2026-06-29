@@ -19,17 +19,31 @@ npm run dev
 npm run build
 ```
 
+Lokales CMS zum Debuggen ohne Docker starten:
+
+```bash
+npm run cms:dev
+```
+
+Alternativ mit Docker starten, falls Docker Desktop installiert ist:
+
+```bash
+npm run cms:dev:docker
+```
+
+Der lokale Directus-Login ist danach unter `http://localhost:8055` erreichbar. Die vorkonfigurierten Debug-Zugangsdaten sind `admin@example.org` / `admin123456`. Diese Zugangsdaten sind nur für lokale Entwicklung gedacht und dürfen nicht produktiv verwendet werden.
+
 ## Directus CMS konfigurieren
 
 Die Website liest beim Build Meldungen und Einsatzberichte aus Directus. Wenn Directus nicht konfiguriert ist, nicht erreichbar ist oder keine gültigen Datensätze liefert, nutzt der Build automatisch die lokalen Fallback-Daten aus `src/data/*`.
 
 1. `.env.example` nach `.env` kopieren.
-2. `PUBLIC_DIRECTUS_URL` auf die öffentliche Directus-URL setzen, z. B. `https://cms.example.org`.
+2. `PUBLIC_DIRECTUS_URL` auf die öffentliche Directus-URL setzen, z. B. `https://cms.example.org`. Im lokalen Dev-Modus nutzt die Website ohne gesetzte URL automatisch `http://localhost:8055`.
 3. Optional `PUBLIC_CMS_ADMIN_URL` setzen, wenn der sichtbare CMS-Login auf eine separate Admin-Adresse zeigen soll. Wenn leer, nutzt die Website `PUBLIC_DIRECTUS_URL`.
 4. Optional `DIRECTUS_TOKEN` setzen, wenn die Collections nicht öffentlich lesbar sind. Dieses Token darf nicht mit `PUBLIC_` beginnen.
 5. Optional `ENABLE_DIRECTUS=false` setzen, um für lokale Tests ausschließlich Fallback-Daten zu verwenden.
 
-Der öffentliche Website-Build enthält keinen eigenen Admin-Login. Navigationslinks zum CMS erscheinen nur, wenn eine gültige CMS-URL konfiguriert ist. `/admin/login/` dient als abgesicherte Weiterleitungs- und Hinweisseite für Redakteurinnen und Redakteure.
+Für lokales Debugging kann Directus mit `npm run cms:dev` ohne Docker unter `http://localhost:8055` laufen; dann funktionieren `/admin/` und `/admin/login/` auch ohne lokale `.env` als Weiterleitung zum lokalen CMS. Wenn `localhost:8055` die Verbindung ablehnt, läuft der separate Directus-Prozess noch nicht. Der Docker-Befehl `npm run cms:dev:docker` ist nur eine Alternative für Systeme mit installiertem Docker Desktop. Der öffentliche Website-Build enthält keinen eigenen Admin-Login. Navigationslinks zum CMS erscheinen nur, wenn eine gültige CMS-URL konfiguriert ist. `/admin/login/` dient als abgesicherte Weiterleitungs- und Hinweisseite für Redakteurinnen und Redakteure.
 
 Erwartete Collections und Felder:
 

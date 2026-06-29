@@ -5,3 +5,6 @@ dist/
 .env.*
 .DS_Store
 artifacts/
+
+# Local Directus debug data
+.directus/
