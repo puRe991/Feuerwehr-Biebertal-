@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getNews } from '@/lib/directus';
+import type { NewsItem } from '@/data/news';
+
+export async function getStaticPaths() {
+  const news = await getNews();
+  return news.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+interface Props { item: NewsItem; }
+
+const { item } = Astro.props;
+const date = new Intl.DateTimeFormat('de-DE', { dateStyle: 'long' }).format(new Date(item.datum));
+---
+<BaseLayout title={item.titel} description={item.teaser}>
+  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <a href="/aktuelles/" class="inline-flex font-extrabold text-brand-red underline-offset-4 hover:underline">← Zurück zu Aktuelles</a>
+    <p class="mt-8 text-sm font-bold uppercase tracking-wide text-slate-500">{date} · {item.kategorie}</p>
+    <h1 class="mt-3 text-4xl font-black text-brand-navy">{item.titel}</h1>
+    <p class="mt-6 text-lg leading-8 text-slate-700">{item.teaser}</p>
+
+    <div class="mt-10 rounded-3xl bg-brand-mist p-6 text-brand-navy">
+      <h2 class="text-xl font-black">Weitere Informationen</h2>
+      <p class="mt-3 leading-7">
+        Ausführlichere Inhalte zu dieser Meldung werden nach redaktioneller Freigabe ergänzt.
+        Bei Fragen zur Meldung erreichen Sie uns über die Kontaktseite.
+      </p>
+      <a href="/kontakt/" class="mt-5 inline-flex font-extrabold text-brand-red underline-offset-4 hover:underline">Kontakt aufnehmen</a>
+    </div>
+  </article>
+</BaseLayout>
