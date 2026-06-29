@@ -2,17 +2,56 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Leitung" description="Leitung und Organisation der Feuerwehr Biebertal.">
-  <section class="mx-auto max-w-5xl px-4 py-16 prose-page">
-    <h1 class="text-4xl font-black text-brand-navy">Leitung</h1>
-    <p>Die Leitung koordiniert Ausbildung, Einsatzbereitschaft, Schutzbereiche und Zusammenarbeit mit der Gemeinde. Sie sorgt dafür, dass ehrenamtliche Arbeit planbar bleibt und Einsatzkräfte gut vorbereitet sind.</p>
-    <h2>Aufgaben der Leitung</h2>
-    <ul>
-      <li>Ausbildung und Übungsbetrieb organisieren</li>
-      <li>Einsatzbereitschaft von Personal, Fahrzeugen und Ausrüstung sichern</li>
-      <li>Schutzbereiche abstimmen und gemeinsame Standards fördern</li>
-      <li>Anliegen von Bürgerinnen, Bürgern und Mitgliedern aufnehmen</li>
-    </ul>
-    <h2>Hinweis</h2>
-    <p>Namen, Funktionen und direkte Kontaktdaten werden erst nach interner Freigabe veröffentlicht.</p>
+  <section class="mx-auto max-w-5xl px-4 py-16">
+    <div class="max-w-3xl">
+      <p class="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Feuerwehr Biebertal</p>
+      <h1 class="mt-3 text-4xl font-black text-brand-navy">Leitung</h1>
+      <p class="mt-4 text-lg leading-8 text-slate-700">
+        Die Leitung koordiniert Ausbildung, Einsatzbereitschaft, Schutzbereiche und Zusammenarbeit mit der Gemeinde.
+        Sie sorgt dafür, dass ehrenamtliche Arbeit planbar bleibt und Einsatzkräfte gut vorbereitet sind.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:col-span-2">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Oberste Dienstherrin</p>
+        <h2 class="mt-3 text-2xl font-black text-brand-navy">Die Bürgermeisterin</h2>
+        <p class="mt-4 leading-7 text-slate-700">
+          Patricia Ortmann ist als Bürgermeisterin die Dienstherrin der Feuerwehr Biebertal und unterstützt unsere Arbeit.
+        </p>
+        <a class="mt-5 inline-flex font-bold text-brand-red hover:text-brand-navy" href="/kontakt">
+          Kontakt
+        </a>
+      </article>
+
+      <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Leitung der Feuerwehr</p>
+        <h2 class="mt-3 text-2xl font-black text-brand-navy">Unser Spitzenduo</h2>
+        <dl class="mt-5 space-y-5 text-slate-700">
+          <div>
+            <dt class="font-bold text-brand-navy">Gemeindebrandinspektor</dt>
+            <dd class="mt-1">Marcel Hänsel</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-brand-navy">Stellvertretender Gemeindebrandinspektor</dt>
+            <dd class="mt-1">Daniel Weil</dd>
+          </div>
+        </dl>
+        <a class="mt-5 inline-flex font-bold text-brand-red hover:text-brand-navy" href="/kontakt">
+          Kontakt
+        </a>
+      </article>
+
+      <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Kinder- und Jugendfeuerwehr</p>
+        <h2 class="mt-3 text-2xl font-black text-brand-navy">Der Nachwuchsförderer</h2>
+        <dl class="mt-5 space-y-5 text-slate-700">
+          <div>
+            <dt class="font-bold text-brand-navy">Gemeindekinder- und Jugendfeuerwehrwart</dt>
+            <dd class="mt-1">Christian Peschke</dd>
+          </div>
+        </dl>
+      </article>
+    </div>
   </section>
 </BaseLayout>
