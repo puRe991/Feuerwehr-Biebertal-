@@ -17,7 +17,7 @@ import { cmsAdminUrl, hasCmsAdmin, LOCAL_DIRECTUS_URL, usesLocalCmsFallback } fr
               <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
                 <p class="font-black">Lokaler Debug-Modus: Directus muss separat laufen.</p>
                 <p class="mt-2">Wenn der Browser "localhost hat die Verbindung abgelehnt" meldet, ist unter <code class="rounded bg-white px-1 py-0.5">{LOCAL_DIRECTUS_URL}</code> kein CMS gestartet.</p>
-                <p class="mt-2">Starte das lokale CMS mit <code class="rounded bg-white px-1 py-0.5">npm run cms:dev</code> und öffne danach den Login erneut.</p>
+                <p class="mt-2">Starte das lokale CMS ohne Docker mit <code class="rounded bg-white px-1 py-0.5">npm run cms:dev</code> und öffne danach den Login erneut.</p>
               </div>
             )}
             <a class="mt-6 inline-flex rounded-xl bg-brand-red px-5 py-3 font-black text-white hover:bg-red-700" href={cmsAdminUrl} rel="noopener noreferrer">CMS öffnen</a>
