@@ -1,5 +1,6 @@
 ---
 import MobileNavigation from './MobileNavigation.astro';
+import feuerwehrLogo from '@/Feuerwehr_logo.png';
 import { cmsAdminUrl, hasCmsAdmin } from '@/lib/cmsAdmin';
 const nav = [
   { href: '/aktuelles/', label: 'Aktuelles' },
@@ -12,7 +13,19 @@ const nav = [
 ---
 <header class="sticky top-0 z-30 border-b border-white/10 bg-brand-navy/95 text-white backdrop-blur">
   <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-    <a href="/" class="flex items-center gap-3 font-black"><span class="flex size-11 items-center justify-center rounded-2xl bg-brand-red">112</span><span>Feuerwehr<br class="sm:hidden" /> Biebertal</span></a>
+    <a href="/" class="flex items-center gap-3 font-black" aria-label="Zur Startseite der Feuerwehr Biebertal">
+      <span class="flex h-12 w-36 items-center justify-center rounded-2xl bg-white p-2 shadow-sm sm:h-14 sm:w-44">
+        <img
+          src={feuerwehrLogo.src}
+          width={feuerwehrLogo.width}
+          height={feuerwehrLogo.height}
+          alt="Feuerwehr Biebertal"
+          class="h-full w-full object-contain"
+          decoding="async"
+        />
+      </span>
+      <span class="sr-only">Feuerwehr Biebertal</span>
+    </a>
     <div class="hidden items-center gap-5 lg:flex">
       <nav aria-label="Hauptnavigation" class="flex gap-5">
         {nav.map((item) => <a class="text-sm font-bold text-slate-100 hover:text-brand-gold" href={item.href}>{item.label}</a>)}
