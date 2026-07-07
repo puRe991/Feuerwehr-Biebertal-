@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Feuerwehr Biebertal">
+  <rect width="256" height="256" rx="56" fill="#071a33"/>
+  <g transform="translate(-25 -16.5) scale(0.85)">
+    <circle cx="180" cy="170" r="86" fill="#f2b705"/>
+    <path d="M180 72c35 54 74 97 74 145a74 74 0 0 1-148 0c0-48 39-91 74-145z" fill="#b91c1c"/>
+  </g>
+</svg>

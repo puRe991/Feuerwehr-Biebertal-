@@ -1,9 +1,13 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/Icon.astro';
 ---
 <BaseLayout title="Drohnengruppe" description="Drohnengruppe der Feuerwehr Biebertal: alarmierbare Unterstützung für Einsatzleitungen mit Luftbild, Wärmebild, Personensuche und Lageerkundung.">
   <section class="mx-auto max-w-5xl px-4 py-16 prose-page">
-    <p class="text-sm font-bold uppercase tracking-[0.24em] text-brand-red">Sondereinheit Feuerwehr Biebertal</p>
+    <div class="not-prose flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-navy text-white">
+      <Icon name="drone" class="h-7 w-7" />
+    </div>
+    <p class="mt-5 text-sm font-bold uppercase tracking-[0.24em] text-brand-red">Sondereinheit Feuerwehr Biebertal</p>
     <h1 class="text-4xl font-black text-brand-navy">Drohnengruppe</h1>
     <p class="text-xl font-semibold text-brand-navy">Schneller Überblick aus der Luft – für Biebertal und auf Anforderung auch überörtlich.</p>
     <p>Die Drohnengruppe der Feuerwehr Biebertal unterstützt Einsatzleitungen mit aktuellen Luftbildern, Wärmebildinformationen und einer sicheren Erkundung aus der Distanz. Sie kommt immer dann zum Einsatz, wenn ein Blick von oben Entscheidungen schneller, gezielter und sicherer macht.</p>

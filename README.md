@@ -89,6 +89,32 @@ Primäre CMS-Inhalte liegen in Directus. Lokale Fallbacks und strukturierte Beis
 
 Große Inhaltsbereiche liegen weiterhin als Astro-Seiten in `src/pages`.
 
+## SEO- und PWA-Grafiken pflegen
+
+`public/favicon.svg` ist die Quelle für Favicon und App-Icons. Nach einer Änderung des Logos oder der Markenfarben die PNG-Varianten neu erzeugen:
+
+```bash
+node -e "
+const sharp = require('sharp');
+const fs = require('fs');
+const svg = fs.readFileSync('public/favicon.svg');
+Promise.all([
+  sharp(svg, { density: 384 }).resize(32, 32).png().toFile('public/favicon-32.png'),
+  sharp(svg, { density: 384 }).resize(180, 180).png().toFile('public/apple-touch-icon.png'),
+  sharp(svg, { density: 384 }).resize(192, 192).png().toFile('public/icon-192.png'),
+  sharp(svg, { density: 384 }).resize(512, 512).png().toFile('public/icon-512.png')
+]);
+"
+```
+
+Ebenso `public/social-preview.png` neu erzeugen, wenn sich `public/social-preview.svg` ändert (Twitter/X akzeptiert kein SVG als Vorschaubild):
+
+```bash
+node -e "require('sharp')('public/social-preview.svg', { density: 192 }).resize(1200, 630).png().toFile('public/social-preview.png')"
+```
+
+`robots.txt` und die Sitemap (`@astrojs/sitemap`) werden automatisch aus `astro.config.mjs` erzeugt; Admin-Routen sind dort per Filter ausgeschlossen.
+
 ## Vor Veröffentlichung ersetzen oder prüfen
 
 - Reale Fahrzeugbilder und technische Daten

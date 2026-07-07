@@ -1,14 +1,19 @@
 ---
+import Icon from '@/components/Icon.astro';
+import type { IconName } from '@/components/Icon.astro';
 const stats = Astro.props.stats ?? [
-  { value: 'ca. 100', label: 'Einsätze im Jahr' },
-  { value: 'ca. 150', label: 'aktive Einsatzkräfte' },
-  { value: '16', label: 'Fahrzeuge' }
+  { value: 'ca. 100', label: 'Einsätze im Jahr', icon: 'siren' },
+  { value: 'ca. 150', label: 'aktive Einsatzkräfte', icon: 'users' },
+  { value: '16', label: 'Fahrzeuge', icon: 'truck' }
 ];
 ---
 <div class="grid gap-4 sm:grid-cols-3">
-  {stats.map((stat: { value: string; label: string }) => (
+  {stats.map((stat: { value: string; label: string; icon?: IconName }) => (
     <div class="rounded-3xl bg-white/95 p-6 text-center shadow-soft">
-      <p class="text-4xl font-black text-brand-red">{stat.value}</p>
+      <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-mist text-brand-red">
+        <Icon name={stat.icon ?? 'gauge'} class="h-6 w-6" />
+      </div>
+      <p class="mt-3 text-4xl font-black text-brand-red">{stat.value}</p>
       <p class="mt-2 font-bold text-brand-navy">{stat.label}</p>
     </div>
   ))}
