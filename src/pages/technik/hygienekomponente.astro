@@ -1,9 +1,13 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/Icon.astro';
 ---
 <BaseLayout title="Hygienekomponente West" description="Hygienekomponente West der Feuerwehren Biebertal und Wettenberg: Einsatzstellenhygiene, Reinigung, Wechselkleidung und Schutz vor Kontaminationsverschleppung.">
   <section class="mx-auto max-w-5xl px-4 py-16 prose-page">
-    <p class="text-sm font-bold uppercase tracking-[0.24em] text-brand-red">Interkommunale Zusammenarbeit</p>
+    <div class="not-prose flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-navy text-white">
+      <Icon name="droplet" class="h-7 w-7" />
+    </div>
+    <p class="mt-5 text-sm font-bold uppercase tracking-[0.24em] text-brand-red">Interkommunale Zusammenarbeit</p>
     <h1 class="text-4xl font-black text-brand-navy">Hygienekomponente West</h1>
     <p class="text-xl font-semibold text-brand-navy">Gemeinsame Einsatzstellenhygiene der Feuerwehren Biebertal und Wettenberg.</p>
     <p>Nach Bränden und technischen Hilfeleistungen können Ruß, Rauchgasrückstände, Fasern, Blut oder andere Schadstoffe an Schutzkleidung, Haut, Atemschutzgeräten und Ausrüstung haften. Die Hygienekomponente West reduziert diese Belastung direkt an der Einsatzstelle und verhindert, dass Kontamination in Fahrzeuge, Feuerwehrhäuser oder private Bereiche verschleppt wird.</p>
