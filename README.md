@@ -73,6 +73,10 @@ Erwartete Collections und Felder:
 
 Wichtig: Einsatzberichte dürfen erst nach interner Freigabe veröffentlicht werden. Directus-Rollen sollten Schreibrechte eng begrenzen und öffentliche API-Zugriffe nur auf freigegebene Felder erlauben.
 
+## Produktives Backend betreiben
+
+Für den dauerhaften Betrieb auf einem eigenen VPS (Postgres statt SQLite, automatisches HTTPS, Backups) siehe [`deploy/DEPLOYMENT.md`](deploy/DEPLOYMENT.md). Die lokalen `cms:dev`-Befehle oben dienen ausschließlich der Entwicklung und sind nicht für den produktiven Einsatz gedacht.
+
 ## Inhalte pflegen
 
 Primäre CMS-Inhalte liegen in Directus. Lokale Fallbacks und strukturierte Beispieldaten liegen in:
