@@ -20,12 +20,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.feuerwehrbiebertal.app.data.einsatzberichte
+import de.feuerwehrbiebertal.app.ui.components.AppHeader
 import de.feuerwehrbiebertal.app.ui.components.DetailTopBar
 import de.feuerwehrbiebertal.app.ui.components.TagChip
 
 @Composable
 fun EinsatzberichteListScreen(onItemClick: (String) -> Unit) {
-    Scaffold { padding ->
+    Scaffold(
+        topBar = { AppHeader(title = "Einsatzberichte", subtitle = "Transparent und datenschutzgeprüft") }
+    ) { padding ->
         if (einsatzberichte.isEmpty()) {
             Box(
                 modifier = Modifier
@@ -58,13 +61,6 @@ fun EinsatzberichteListScreen(onItemClick: (String) -> Unit) {
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            item {
-                Text(
-                    text = "Einsatzberichte",
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-            }
             items(einsatzberichte, key = { it.slug }) { bericht ->
                 Card(
                     modifier = Modifier

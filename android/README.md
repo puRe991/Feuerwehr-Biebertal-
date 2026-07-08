@@ -1,14 +1,33 @@
 # Feuerwehr Biebertal – Android App
 
-Native Android-App (Kotlin, Jetpack Compose, Material 3) für die Freiwillige Feuerwehr Biebertal. Losgelöst von der Astro-Website in `../src`, aber inhaltlich mit deren Fallback-Daten synchron.
+Native Android-App (Kotlin, Jetpack Compose, Material 3) für die Freiwillige Feuerwehr Biebertal. Losgelöst von der Astro-Website in `../src`, mit eigenem Feuerwehr-Design und realen, recherchierten Inhalten.
+
+## Design
+
+- Eigenes Feuerwehr-Design statt generischem Material-Look: dunkelblauer `AppHeader` mit Wappen-Icon auf jedem Screen, darunter ein rot/leuchtgelb-grüner Battenburg-Streifen (`BattenburgStripe`) wie auf echten Einsatzfahrzeugen.
+- Eigene Vektorgrafiken in `app/src/main/res/drawable/`: Wappen/Badge (`ic_wappen`), Feuerwehrauto (`ic_fire_truck`, u. a. als Bottom-Navigation-Icon), Drohne (`ic_drone`).
+- Adaptive App-Icon und animiertes Splash-Icon, abgeleitet aus dem bestehenden `favicon.svg`-Design der Website.
+- Notruf-Karte (112) auf dem Start-Bildschirm mit direktem Wahl-Intent.
 
 ## Technik
 
 - Kotlin + Jetpack Compose, Material 3
-- Navigation über `androidx.navigation-compose` mit Bottom Navigation (Meldungen, Einsätze, Fahrzeuge, Kontakt)
-- Inhalte als statische Kotlin-Daten in `app/src/main/java/de/feuerwehrbiebertal/app/data/*.kt`, portiert aus `../src/data/*.ts`
+- Navigation über `androidx.navigation-compose` mit Bottom Navigation: Start, Meldungen, Einsätze, Fahrzeuge, Kontakt
+- Splash Screen über `androidx.core.splashscreen`
+- Inhalte als statische Kotlin-Daten in `app/src/main/java/de/feuerwehrbiebertal/app/data/*.kt`
 - minSdk 26, targetSdk/compileSdk 34
 - Keine Netzwerkzugriffe, keine Tracking-SDKs
+
+## Inhalte und Quellen
+
+Die Inhalte wurden anhand öffentlich zugänglicher Quellen recherchiert und in den Datendateien hinterlegt:
+
+- [feuerwehr-biebertal.de](https://www.feuerwehr-biebertal.de/) – Kontakt, Schutzbereichsleitung, Fahrzeugübersicht, aktuelle Meldungen
+- [biebertal.de](https://www.biebertal.de/politik-verwaltung/oeffentliche-einrichtungen/feuerwehr/feuerwehr.html) – Organisationsstruktur, Ortsteile, Leitung
+- [feuerwehr.hessen.de – Feuerwehr des Monats](https://feuerwehr.hessen.de/ehrenamt/feuerwehr-des-monats/freiwillige-feuerwehr-biebertal) – Auszeichnung Dezember 2019, Einsatzzahlen
+- [ffw-frankenbach.de/Geschichte](https://ffw-frankenbach.de/Geschichte/) – Historie der Wehr Frankenbach (Schutzbereich Nord)
+
+Namen, Adressen und Zahlen (z. B. Mitgliederzahlen, Fahrzeugtypen) stammen von dort und können sich ändern – bei Zweifeln bitte gegen die offizielle Website prüfen. Genaue Funkrufnamen einzelner Fahrzeuge sind nicht öffentlich gelistet und wurden daher bewusst nicht erfunden; stattdessen werden die realen Fahrzeugtyp-Kurzbezeichnungen (z. B. `HLF 20`, `GW-L KatS`) verwendet.
 
 ## Öffnen und bauen
 
@@ -26,12 +45,12 @@ Die fertige APK liegt danach unter `app/build/outputs/apk/debug/app-debug.apk`.
 
 ## Inhalte pflegen
 
-Da die App aktuell ausschließlich mit statischen Daten arbeitet, werden neue Meldungen, Einsatzberichte, Fahrzeuge oder Ansprechpartner direkt in den Kotlin-Dateien unter `app/src/main/java/de/feuerwehrbiebertal/app/data/` gepflegt und erfordern einen neuen App-Build. Die Struktur ist bewusst deckungsgleich mit den TypeScript-Fallbacks der Website gehalten, damit beide Quellen leicht synchron bleiben.
+Da die App aktuell ausschließlich mit statischen Daten arbeitet, werden neue Meldungen, Einsatzberichte, Fahrzeuge oder Ansprechpartner direkt in den Kotlin-Dateien unter `app/src/main/java/de/feuerwehrbiebertal/app/data/` gepflegt und erfordern einen neuen App-Build.
 
-`einsatzberichte.kt` ist absichtlich leer, solange keine Einsatzberichte intern freigegeben sind (siehe Datenschutzhinweise in der Haupt-README).
+`Einsatzbericht.kt` ist absichtlich leer, solange keine Einsatzberichte intern freigegeben sind (siehe Datenschutzhinweise in der Haupt-README).
 
-## Bekannte Grenzen dieser ersten Version
+## Bekannte Grenzen dieser Version
 
 - Keine Anbindung an das Directus-CMS der Website; Inhalte sind rein statisch und offline.
-- App-Icon ist aus dem bestehenden `favicon.svg`-Design abgeleitet, aber nicht pixelgenau mit dem Image-Asset-Tool von Android Studio nachbearbeitet.
+- Fahrzeuge sind anhand öffentlich bekannter Typen den Schutzbereichen zugeordnet; die exakte Verteilung aller 16 Fahrzeuge ist nicht vollständig öffentlich dokumentiert.
 - Keine automatisierten Tests (Unit/UI) enthalten.

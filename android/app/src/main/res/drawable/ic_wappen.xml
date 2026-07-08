@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="256"
+    android:viewportHeight="256">
+    <!-- Navy Grundfläche -->
+    <path
+        android:fillColor="#071A33"
+        android:pathData="M128,8 a120,120 0 1,0 0.1,0 z" />
+    <!-- Goldener Ring -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F7B733"
+        android:strokeWidth="10"
+        android:pathData="M128,13 a115,115 0 1,0 0.1,0 z" />
+    <group
+        android:pivotX="128"
+        android:pivotY="128"
+        android:scaleX="0.72"
+        android:scaleY="0.72">
+        <group
+            android:translateX="-25"
+            android:translateY="-16.5"
+            android:scaleX="0.85"
+            android:scaleY="0.85">
+            <path
+                android:fillColor="#F2B705"
+                android:pathData="M94,170 a86,86 0 1,0 172,0 a86,86 0 1,0 -172,0" />
+            <path
+                android:fillColor="#B91C1C"
+                android:pathData="M180,72c35,54 74,97 74,145a74,74 0 0 1 -148,0c0,-48 39,-91 74,-145z" />
+        </group>
+    </group>
+</vector>

@@ -17,13 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.feuerwehrbiebertal.app.data.news
+import de.feuerwehrbiebertal.app.ui.components.AppHeader
 import de.feuerwehrbiebertal.app.ui.components.DetailTopBar
 import de.feuerwehrbiebertal.app.ui.components.NewsKategorieChip
 
 @Composable
 fun NewsListScreen(onNewsClick: (String) -> Unit) {
     Scaffold(
-        topBar = { }
+        topBar = { AppHeader(title = "Meldungen", subtitle = "Aktuelles aus der Feuerwehr Biebertal") }
     ) { padding ->
         LazyColumn(
             modifier = Modifier
@@ -32,13 +33,6 @@ fun NewsListScreen(onNewsClick: (String) -> Unit) {
             contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            item {
-                Text(
-                    text = "Meldungen",
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-            }
             items(news, key = { it.slug }) { item ->
                 Card(
                     modifier = Modifier

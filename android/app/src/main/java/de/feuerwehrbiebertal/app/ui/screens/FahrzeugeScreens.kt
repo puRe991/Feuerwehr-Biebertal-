@@ -21,12 +21,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.feuerwehrbiebertal.app.data.fahrzeuge
 import de.feuerwehrbiebertal.app.data.schutzbereiche
+import de.feuerwehrbiebertal.app.ui.components.AppHeader
 import de.feuerwehrbiebertal.app.ui.components.DetailTopBar
 import de.feuerwehrbiebertal.app.ui.components.TagChip
 
 @Composable
 fun FahrzeugeScreen(onFahrzeugClick: (String) -> Unit, onSchutzbereichClick: (String) -> Unit) {
-    Scaffold { padding ->
+    Scaffold(
+        topBar = { AppHeader(title = "Fahrzeuge & Schutzbereiche", subtitle = "16 Fahrzeuge in drei Schutzbereichen") }
+    ) { padding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -44,7 +47,7 @@ fun FahrzeugeScreen(onFahrzeugClick: (String) -> Unit, onSchutzbereichClick: (St
                         .clickable { onFahrzeugClick(fahrzeug.slug) }
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = fahrzeug.funk, style = MaterialTheme.typography.titleLarge)
+                        Text(text = fahrzeug.kurzname, style = MaterialTheme.typography.titleLarge)
                         Text(text = fahrzeug.typ, style = MaterialTheme.typography.bodyMedium)
                         Text(
                             text = fahrzeug.standort,
@@ -87,7 +90,7 @@ fun FahrzeugDetailScreen(slug: String, onBack: () -> Unit) {
     val fahrzeug = fahrzeuge.find { it.slug == slug }
 
     Scaffold(
-        topBar = { DetailTopBar(title = fahrzeug?.funk ?: "Fahrzeug", onBack = onBack) }
+        topBar = { DetailTopBar(title = fahrzeug?.kurzname ?: "Fahrzeug", onBack = onBack) }
     ) { padding ->
         if (fahrzeug == null) {
             Box(
@@ -107,13 +110,12 @@ fun FahrzeugDetailScreen(slug: String, onBack: () -> Unit) {
         ) {
             Text(text = fahrzeug.typ, style = MaterialTheme.typography.headlineMedium)
             Text(
-                text = fahrzeug.funk,
+                text = fahrzeug.kurzname,
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
             )
             InfoRow(label = "Standort", value = fahrzeug.standort)
             InfoRow(label = "Einsatzzweck", value = fahrzeug.einsatzzweck)
-            InfoRow(label = "Besatzung", value = fahrzeug.besatzung)
 
             Text(
                 text = "Besonderheiten",
@@ -150,16 +152,24 @@ fun SchutzbereichDetailScreen(slug: String, onBack: () -> Unit) {
                 .padding(padding)
                 .padding(16.dp)
         ) {
-            Text(text = bereich.feuerwehrhaus, style = MaterialTheme.typography.headlineMedium)
+            Text(text = "Schutzbereich ${bereich.name}", style = MaterialTheme.typography.headlineMedium)
             Text(
                 text = bereich.beschreibung,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
             )
             InfoRow(label = "Ortsteile", value = bereich.ortsteile.joinToString(", "))
+            InfoRow(
+                label = if (bereich.feuerwehrhaeuser.size > 1) "Feuerwehrhäuser" else "Feuerwehrhaus",
+                value = bereich.feuerwehrhaeuser.joinToString("\n") { "${it.ortsteil}: ${it.adresse}" }
+            )
             InfoRow(label = "Fahrzeuge", value = bereich.fahrzeuge.joinToString(", "))
             InfoRow(label = "Übungszeiten", value = bereich.uebungszeiten)
-            InfoRow(label = "Ansprechpartner", value = bereich.ansprechpartner)
+            InfoRow(label = "Schutzbereichsleiter", value = bereich.leiter)
+            InfoRow(
+                label = if (bereich.stellvertreter.size > 1) "Stellvertreter" else "Stellvertreter",
+                value = bereich.stellvertreter.joinToString(", ")
+            )
         }
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -23,10 +24,12 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
+import de.feuerwehrbiebertal.app.R
 import de.feuerwehrbiebertal.app.ui.screens.EinsatzberichtDetailScreen
 import de.feuerwehrbiebertal.app.ui.screens.EinsatzberichteListScreen
 import de.feuerwehrbiebertal.app.ui.screens.FahrzeugDetailScreen
 import de.feuerwehrbiebertal.app.ui.screens.FahrzeugeScreen
+import de.feuerwehrbiebertal.app.ui.screens.HomeScreen
 import de.feuerwehrbiebertal.app.ui.screens.KontaktScreen
 import de.feuerwehrbiebertal.app.ui.screens.NewsDetailScreen
 import de.feuerwehrbiebertal.app.ui.screens.NewsListScreen
@@ -35,17 +38,22 @@ import de.feuerwehrbiebertal.app.ui.screens.SchutzbereichDetailScreen
 private data class BottomTab(
     val route: String,
     val label: String,
-    val icon: androidx.compose.ui.graphics.vector.ImageVector
+    val icon: @Composable () -> Unit
 )
 
 private val bottomTabs = listOf(
-    BottomTab(Routes.NEWS_GRAPH, "Meldungen", Icons.Filled.Newspaper),
-    BottomTab(Routes.EINSAETZE_GRAPH, "Einsätze", Icons.Filled.LocalFireDepartment),
-    BottomTab(Routes.FAHRZEUGE_GRAPH, "Fahrzeuge", Icons.Filled.Home),
-    BottomTab(Routes.KONTAKT, "Kontakt", Icons.Filled.Phone)
+    BottomTab(Routes.HOME, "Start") { Icon(Icons.Filled.Home, contentDescription = "Start") },
+    BottomTab(Routes.NEWS_GRAPH, "Meldungen") { Icon(Icons.Filled.Newspaper, contentDescription = "Meldungen") },
+    BottomTab(Routes.EINSAETZE_GRAPH, "Einsätze") { Icon(Icons.Filled.LocalFireDepartment, contentDescription = "Einsätze") },
+    BottomTab(Routes.FAHRZEUGE_GRAPH, "Fahrzeuge") {
+        Icon(painterResource(id = R.drawable.ic_fire_truck), contentDescription = "Fahrzeuge")
+    },
+    BottomTab(Routes.KONTAKT, "Kontakt") { Icon(Icons.Filled.Phone, contentDescription = "Kontakt") }
 )
 
 object Routes {
+    const val HOME = "home"
+
     const val NEWS_GRAPH = "news_graph"
     const val NEWS_LIST = "news"
     const val NEWS_DETAIL = "news/{slug}"
@@ -85,7 +93,7 @@ fun FeuerwehrBiebertalApp() {
                                 restoreState = true
                             }
                         },
-                        icon = { Icon(tab.icon, contentDescription = tab.label) },
+                        icon = tab.icon,
                         label = { Text(tab.label) }
                     )
                 }
@@ -94,9 +102,22 @@ fun FeuerwehrBiebertalApp() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Routes.NEWS_GRAPH,
+            startDestination = Routes.HOME,
             modifier = Modifier.padding(innerPadding)
         ) {
+            composable(Routes.HOME) {
+                HomeScreen(
+                    onNewsClick = { slug -> navController.navigate("news/$slug") },
+                    onAlleMeldungenClick = {
+                        navController.navigate(Routes.NEWS_GRAPH) {
+                            popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                )
+            }
+
             navigation(startDestination = Routes.NEWS_LIST, route = Routes.NEWS_GRAPH) {
                 composable(Routes.NEWS_LIST) {
                     NewsListScreen(onNewsClick = { slug -> navController.navigate("news/$slug") })
