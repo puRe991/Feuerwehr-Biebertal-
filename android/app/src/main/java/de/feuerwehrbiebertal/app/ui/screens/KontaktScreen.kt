@@ -14,9 +14,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -28,6 +30,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import de.feuerwehrbiebertal.app.data.ALLGEMEINE_ADRESSE
 import de.feuerwehrbiebertal.app.data.ALLGEMEINE_TELEFONNUMMER
+import de.feuerwehrbiebertal.app.data.FACEBOOK_URL
+import de.feuerwehrbiebertal.app.data.INSTAGRAM_URL
+import de.feuerwehrbiebertal.app.data.WHATSAPP_CHANNEL_URL
 import de.feuerwehrbiebertal.app.data.ansprechpartner
 import de.feuerwehrbiebertal.app.ui.components.AppHeader
 
@@ -79,6 +84,35 @@ fun KontaktScreen() {
             }
 
             item {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+                        Text(
+                            text = "Folgen & Fotos",
+                            style = MaterialTheme.typography.titleLarge,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+                        )
+                        SocialLinkRow(
+                            label = "WhatsApp-Kanal abonnieren",
+                            url = WHATSAPP_CHANNEL_URL,
+                            context = context
+                        )
+                        HorizontalDivider()
+                        SocialLinkRow(
+                            label = "Facebook: Fotos & Aktuelles",
+                            url = FACEBOOK_URL,
+                            context = context
+                        )
+                        HorizontalDivider()
+                        SocialLinkRow(
+                            label = "Instagram: Fotos & Aktuelles",
+                            url = INSTAGRAM_URL,
+                            context = context
+                        )
+                    }
+                }
+            }
+
+            item {
                 Text(
                     text = "Ansprechpartner",
                     style = MaterialTheme.typography.headlineMedium,
@@ -121,5 +155,20 @@ fun KontaktScreen() {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun SocialLinkRow(label: String, url: String, context: android.content.Context) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
+            .padding(horizontal = 16.dp, vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Icon(Icons.Filled.Link, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        Text(text = label, style = MaterialTheme.typography.bodyLarge)
     }
 }

@@ -1,18 +1,24 @@
 package de.feuerwehrbiebertal.app.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Link
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,10 +26,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.feuerwehrbiebertal.app.R
+import de.feuerwehrbiebertal.app.data.FACEBOOK_URL
 import de.feuerwehrbiebertal.app.data.fahrzeuge
 import de.feuerwehrbiebertal.app.data.schutzbereiche
 import de.feuerwehrbiebertal.app.ui.components.AppHeader
@@ -32,6 +40,8 @@ import de.feuerwehrbiebertal.app.ui.components.TagChip
 
 @Composable
 fun FahrzeugeScreen(onFahrzeugClick: (String) -> Unit, onSchutzbereichClick: (String) -> Unit) {
+    val context = LocalContext.current
+
     Scaffold(
         topBar = { AppHeader(title = "Fahrzeuge & Schutzbereiche", subtitle = "16 Fahrzeuge in drei Schutzbereichen") }
     ) { padding ->
@@ -42,6 +52,22 @@ fun FahrzeugeScreen(onFahrzeugClick: (String) -> Unit, onSchutzbereichClick: (St
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(FACEBOOK_URL))) }
+                ) {
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Icon(Icons.Filled.Link, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Text(text = "Echte Einsatzfotos auf Facebook ansehen", style = MaterialTheme.typography.bodyLarge)
+                    }
+                }
+            }
             item {
                 Text(text = "Fahrzeuge", style = MaterialTheme.typography.headlineMedium)
             }

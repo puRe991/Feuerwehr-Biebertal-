@@ -1,5 +1,7 @@
 package de.feuerwehrbiebertal.app.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,12 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.feuerwehrbiebertal.app.data.news
@@ -62,6 +66,7 @@ fun NewsListScreen(onNewsClick: (String) -> Unit) {
 @Composable
 fun NewsDetailScreen(slug: String, onBack: () -> Unit) {
     val item = news.find { it.slug == slug }
+    val context = LocalContext.current
 
     Scaffold(
         topBar = { DetailTopBar(title = item?.titel ?: "Meldung", onBack = onBack) }
@@ -99,6 +104,16 @@ fun NewsDetailScreen(slug: String, onBack: () -> Unit) {
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(top = 16.dp)
             )
+            if (item.externerLink != null) {
+                Button(
+                    onClick = {
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.externerLink)))
+                    },
+                    modifier = Modifier.padding(top = 16.dp)
+                ) {
+                    Text("Kanal öffnen")
+                }
+            }
         }
     }
 }

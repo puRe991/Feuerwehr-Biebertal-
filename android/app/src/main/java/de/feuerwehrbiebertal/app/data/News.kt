@@ -11,7 +11,8 @@ data class NewsItem(
     val titel: String,
     val kategorie: NewsKategorie,
     val datum: String,
-    val teaser: String
+    val teaser: String,
+    val externerLink: String? = null
 )
 
 val news = listOf(
@@ -27,7 +28,8 @@ val news = listOf(
         titel = "Neuer WhatsApp-Kanal der Feuerwehr Biebertal",
         kategorie = NewsKategorie.HINWEIS,
         datum = "2026-05-01",
-        teaser = "Ab sofort informiert die Feuerwehr Biebertal auch über einen eigenen WhatsApp-Kanal zu Einsätzen und Sicherheitstipps. Jetzt abonnieren und nichts mehr verpassen."
+        teaser = "Ab sofort informiert die Feuerwehr Biebertal auch über einen eigenen WhatsApp-Kanal zu Einsätzen und Sicherheitstipps. Jetzt abonnieren und nichts mehr verpassen.",
+        externerLink = WHATSAPP_CHANNEL_URL
     ),
     NewsItem(
         slug = "mitglied-werden",
