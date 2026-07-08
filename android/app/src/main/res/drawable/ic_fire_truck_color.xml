@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="44dp"
+    android:height="20dp"
+    android:viewportWidth="44"
+    android:viewportHeight="20">
+
+    <!-- Ladder-Schiene -->
+    <path android:fillColor="#9AA3AD" android:pathData="M2,4.4h24v1.4h-24z" />
+
+    <!-- Heckbox -->
+    <path android:pathData="M2,6.2h24a1.4,1.4 0 0 1 1.4,1.4v6.2h-26.8v-6.2a1.4,1.4 0 0 1 1.4,-1.4z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="2" android:startY="6.2" android:endX="2" android:endY="14"
+                android:startColor="#E5383B" android:endColor="#B91C1C" />
+        </aapt:attr>
+    </path>
+
+    <!-- Seitenstreifen -->
+    <path android:fillColor="#FFD166" android:pathData="M2,10.4h25.4v1.6h-25.4z" />
+
+    <!-- Fahrerkabine -->
+    <path android:pathData="M27.4,8.2h4.6a2,2 0 0 1 1.7,0.95l3,4.85v0.6a1,1 0 0 1 -1,1h-8.3z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="27.4" android:startY="8.2" android:endX="27.4" android:endY="15.6"
+                android:startColor="#E5383B" android:endColor="#B91C1C" />
+        </aapt:attr>
+    </path>
+
+    <!-- Windschutzscheibe -->
+    <path android:fillColor="#BFE9FF" android:pathData="M29.6,9.6h2.4a1,1 0 0 1 0.85,0.47l1.55,2.53h-4.8z" />
+
+    <!-- Blaulicht-Balken -->
+    <path android:fillColor="#2E3A46" android:pathData="M12,2.6h5.5v1.9h-5.5z" />
+    <path android:fillColor="#FF5A5A" android:pathData="M13.1,2.9h1.4v1.3h-1.4z" />
+    <path android:fillColor="#7FD6FF" android:pathData="M15.1,2.9h1.4v1.3h-1.4z" />
+
+    <!-- Räder -->
+    <path android:fillColor="#2B2F33" android:pathData="M6.4,15.4a2.6,2.6 0 1,0 5.2,0a2.6,2.6 0 1,0 -5.2,0" />
+    <path android:fillColor="#C9CED3" android:pathData="M7.85,15.4a1.15,1.15 0 1,0 2.3,0a1.15,1.15 0 1,0 -2.3,0" />
+    <path android:fillColor="#2B2F33" android:pathData="M21.4,15.4a2.6,2.6 0 1,0 5.2,0a2.6,2.6 0 1,0 -5.2,0" />
+    <path android:fillColor="#C9CED3" android:pathData="M22.85,15.4a1.15,1.15 0 1,0 2.3,0a1.15,1.15 0 1,0 -2.3,0" />
+    <path android:fillColor="#2B2F33" android:pathData="M31.2,15.4a2.2,2.2 0 1,0 4.4,0a2.2,2.2 0 1,0 -4.4,0" />
+    <path android:fillColor="#C9CED3" android:pathData="M32.45,15.4a0.95,0.95 0 1,0 1.9,0a0.95,0.95 0 1,0 -1.9,0" />
+</vector>

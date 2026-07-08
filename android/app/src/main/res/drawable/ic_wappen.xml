@@ -1,35 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="48dp"
     android:height="48dp"
     android:viewportWidth="256"
     android:viewportHeight="256">
-    <!-- Navy Grundfläche -->
+
+    <!-- Schild mit Navy-Verlauf und goldenem Rand -->
     <path
-        android:fillColor="#071A33"
-        android:pathData="M128,8 a120,120 0 1,0 0.1,0 z" />
-    <!-- Goldener Ring -->
-    <path
-        android:fillColor="#00000000"
+        android:pathData="M128,12 L228,44 V126 C228,190 186,232 128,250 C70,232 28,190 28,126 V44 Z"
         android:strokeColor="#F7B733"
-        android:strokeWidth="10"
-        android:pathData="M128,13 a115,115 0 1,0 0.1,0 z" />
-    <group
-        android:pivotX="128"
-        android:pivotY="128"
-        android:scaleX="0.72"
-        android:scaleY="0.72">
-        <group
-            android:translateX="-25"
-            android:translateY="-16.5"
-            android:scaleX="0.85"
-            android:scaleY="0.85">
-            <path
-                android:fillColor="#F2B705"
-                android:pathData="M94,170 a86,86 0 1,0 172,0 a86,86 0 1,0 -172,0" />
-            <path
-                android:fillColor="#B91C1C"
-                android:pathData="M180,72c35,54 74,97 74,145a74,74 0 0 1 -148,0c0,-48 39,-91 74,-145z" />
-        </group>
-    </group>
+        android:strokeWidth="8">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="28"
+                android:startY="12"
+                android:endX="228"
+                android:endY="250"
+                android:startColor="#0D2B52"
+                android:endColor="#050F1F" />
+        </aapt:attr>
+    </path>
+
+    <!-- Flamme, außen -->
+    <path
+        android:pathData="M128,64 C150,96 168,118 168,148 C168,184 150,206 128,210 C106,206 88,184 88,148 C88,132 98,118 106,108 C104,122 112,134 124,136 C114,118 120,96 128,64 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="128"
+                android:startY="64"
+                android:endX="128"
+                android:endY="210"
+                android:startColor="#FFD166"
+                android:centerColor="#F7B733"
+                android:centerX="0.45"
+                android:endColor="#D71920" />
+        </aapt:attr>
+    </path>
+
+    <!-- Flamme, Kern -->
+    <path
+        android:pathData="M128,112 C138,128 144,140 144,156 C144,172 136,182 128,184 C120,182 112,172 112,156 C112,146 118,138 122,132 C121,140 126,146 132,147 C125,136 124,124 128,112 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="128"
+                android:startY="112"
+                android:endX="128"
+                android:endY="184"
+                android:startColor="#FFF3C4"
+                android:endColor="#F7B733" />
+        </aapt:attr>
+    </path>
 </vector>

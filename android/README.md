@@ -4,10 +4,11 @@ Native Android-App (Kotlin, Jetpack Compose, Material 3) für die Freiwillige Fe
 
 ## Design
 
-- Eigenes Feuerwehr-Design statt generischem Material-Look: dunkelblauer `AppHeader` mit Wappen-Icon auf jedem Screen, darunter ein rot/leuchtgelb-grüner Battenburg-Streifen (`BattenburgStripe`) wie auf echten Einsatzfahrzeugen.
-- Eigene Vektorgrafiken in `app/src/main/res/drawable/`: Wappen/Badge (`ic_wappen`), Feuerwehrauto (`ic_fire_truck`, u. a. als Bottom-Navigation-Icon), Drohne (`ic_drone`).
-- Adaptive App-Icon und animiertes Splash-Icon, abgeleitet aus dem bestehenden `favicon.svg`-Design der Website.
-- Notruf-Karte (112) auf dem Start-Bildschirm mit direktem Wahl-Intent.
+- Eigenes Feuerwehr-Design statt generischem Material-Look: Schild-Wappen mit Verlaufs-Flamme (`ic_wappen`) im `AppHeader` auf jedem Screen, darunter ein rot/leuchtgelb-grüner Chevron-Warnstreifen (`HazardStripe`), wie er als Heckmarkierung auf echten Einsatzfahrzeugen zu finden ist.
+- Eigene Vektorgrafiken mit Farbverläufen in `app/src/main/res/drawable/`: Schild-Wappen (`ic_wappen`), farbiges Feuerwehrauto für die Fahrzeugliste (`ic_fire_truck_color`) und vereinfachte Silhouette für die Bottom-Navigation (`ic_fire_truck`), Drohne (`ic_drone`).
+- Alle Grafiken wurden vor der Umsetzung als SVG entworfen und per Headless-Chromium-Screenshot visuell geprüft, bevor sie 1:1 als Android-VectorDrawables (inkl. Gradients) übernommen wurden.
+- Adaptive App-Icon und animiertes Splash-Icon nutzen dieselbe Verlaufs-Flamme wie das Wappen im Header – ein durchgängiges Markenbild statt Einzelgrafiken.
+- Notruf-Karte (112) auf dem Start-Bildschirm mit Rot-Verlauf, Pill-Button und direktem Wahl-Intent.
 
 ## Technik
 

@@ -4,10 +4,19 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-    <path android:fillColor="#FF000000" android:pathData="M2,8h13v1.5h-13z" />
-    <path android:fillColor="#FF000000" android:pathData="M1,9.5h15v6h-15z" />
-    <path android:fillColor="#FF000000" android:pathData="M16,11h4l2,3v1.5h-6z" />
-    <path android:fillColor="#FF000000" android:pathData="M3,17.5a2,2 0 1,0 4,0a2,2 0 1,0 -4,0" />
-    <path android:fillColor="#FF000000" android:pathData="M12,17.5a2,2 0 1,0 4,0a2,2 0 1,0 -4,0" />
-    <path android:fillColor="#FF000000" android:pathData="M17.4,17.5a1.6,1.6 0 1,0 3.2,0a1.6,1.6 0 1,0 -3.2,0" />
+    <!-- Karosserie (Heckbox + Fahrerkabine) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M1,9.6h14.4a1.6,1.6 0 0 1 1.6,1.6v5.4h-16z
+                           M16,10.8h3.4a2.1,2.1 0 0 1 1.8,1l2.3,3.6v1.2h-7.5z" />
+    <!-- Räder mit ausgestanzter Nabe -->
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M3.5,17a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0
+                           M4.95,17a1.05,1.05 0 1,0 2.1,0a1.05,1.05 0 1,0 -2.1,0
+                           M12.5,17a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0
+                           M13.95,17a1.05,1.05 0 1,0 2.1,0a1.05,1.05 0 1,0 -2.1,0
+                           M19,17a2,2 0 1,0 4,0a2,2 0 1,0 -4,0
+                           M20.15,17a0.85,0.85 0 1,0 1.7,0a0.85,0.85 0 1,0 -1.7,0" />
 </vector>
