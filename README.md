@@ -2,6 +2,8 @@
 
 Modernes, statisches Astro-Projekt für die Freiwillige Feuerwehr Biebertal. Der Fokus liegt auf schneller Auslieferung, mobiler Nutzbarkeit, Barrierearmut, Datenschutz und einfacher Pflege über strukturierte Daten.
 
+Für die native Android-App siehe [`android/README.md`](android/README.md).
+
 ## Technik
 
 - Astro mit TypeScript
